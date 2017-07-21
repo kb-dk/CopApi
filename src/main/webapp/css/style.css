@@ -37,7 +37,7 @@ div.desc {
 }
 
 .navbar-brand {
-    background: transparent url(/images/logo_inverse.png) no-repeat top left !important;
+    background: transparent url(../images/logo_inverse.png) no-repeat top left !important;
     background-size: cover;
     width: 150px;
 }
