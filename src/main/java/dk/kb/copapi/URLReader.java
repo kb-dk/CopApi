@@ -1,4 +1,4 @@
-package dk.kb.simplecopapi;
+package dk.kb.copapi;
 
 import org.w3c.dom.Document;
 

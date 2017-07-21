@@ -1,4 +1,4 @@
-package dk.kb.simplecopapi;
+package dk.kb.copapi;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

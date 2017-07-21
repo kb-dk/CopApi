@@ -1,4 +1,4 @@
-package dk.kb.simplecopapi;
+package dk.kb.copapi;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;

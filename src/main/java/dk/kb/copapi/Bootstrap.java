@@ -1,4 +1,4 @@
-package dk.kb.simplecopapi;
+package dk.kb.copapi;
 
 /**
  * Created by laap on 05-05-2017.
@@ -20,7 +20,7 @@ public class Bootstrap extends HttpServlet {
 
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("1.0.0");
-        beanConfig.setBasePath("http://localhost:8080/rest");
+        beanConfig.setBasePath("/copapi/rest");
         beanConfig.setResourcePackage("io.swagger.resources");
         beanConfig.setScan(true);
     }

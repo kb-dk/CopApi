@@ -1,4 +1,4 @@
-package dk.kb.simplecopapi;
+package dk.kb.copapi;
 
 /**
  * Created by laap on 09-05-2017.
