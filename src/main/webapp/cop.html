@@ -124,14 +124,16 @@
     var xhr;
     function getData(currentPage) {
         //Display the url
-        var url = "rest/api/cop?itemsPerPage=50"
+        var url = "rest/api/cop?itemsPerPage=30"
             + "&id=" + $('#editions').val()
             + "&query=" + $('#query').val()
             + "&after=" + $('#notAfter').val()
             + "&before=" + $('#notBefore').val()
             + "&page=" + currentPage;
-        var url2 = "http://www.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=50&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
-        $("#json").val(url);
+
+        var url2 = "http://www.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
+        $("#json").val("http://labs.kb.dk:8080/copapi/" + url);
+
         $("#rss").val(url2 + "&format=rss");
         $("#mods").val(url2 + "&format=mods");
         $("#kml").val(url2 + "&format=kml");
