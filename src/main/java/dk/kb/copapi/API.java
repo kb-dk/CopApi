@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class API {
     @ApiOperation(value = "Get a list of items from a specific edition ",
             response = API.class)
     @Path("cop/")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response getItemsInsideEditions(
             @ApiParam(value = "Edition id", name = "id", required = true) @QueryParam("id") String id,
             @ApiParam(value = "Search query", name = "query") @QueryParam("query") String query,
@@ -107,7 +108,7 @@ public class API {
             url += "&itemsPerPage=" + itemsPerPage;
         }
         if (query != null) {
-            url += "&query=" + query;
+            url += "&query=" + URLEncoder.encode(query, "UTF-8");
         }
         if (notBefore != null) {
             url += "&notBefore=" + notBefore;
@@ -188,7 +189,7 @@ public class API {
     @GET
     @Path("dsfl/")
     @ApiOperation(value = "Get a list of pictures (url, coordinates and descriptions) inside a bounding box")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response getDSFLPhotos(
             @ApiParam(value = "The bounding box", name = "bbo", required = true) @QueryParam("bbo") String bbo,
             @ApiParam(value = "Pagination-Page", name = "page") @QueryParam("page") String page,
