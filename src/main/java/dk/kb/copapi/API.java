@@ -44,7 +44,7 @@ public class API {
 
         try {
             URLReader reader = new URLReader();
-            Document doc = reader.getDocument("http://cop.kb.dk/cop/editions/editions/any/2009/jul/editions/da");
+            Document doc = reader.getDocument("http://www.kb.dk/cop/editions/editions/any/2009/jul/editions/da");
             doc.getDocumentElement().normalize();
 
             NodeList nodeList = doc.getElementsByTagName("item");
@@ -182,7 +182,6 @@ public class API {
 
         System.out.println(url);
         Document xmlDocument = reader.getDocument(url);
-        System.out.println(url);
         return Response.status(200).entity(xmlDocument).build();
     }
 

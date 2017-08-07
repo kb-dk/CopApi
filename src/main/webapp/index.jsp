@@ -122,7 +122,7 @@
         if (xhr != null){
             xhr.abort();
         }
-        var url =  "http://localhost:8080/rest/api/dsfl?bbo=" + bounds+ "&itemsPerPage=500";
+        var url =  "http:/labs.kb.dk:8080/copapi/rest/api/dsfl?bbo=" + bounds+ "&itemsPerPage=500";
         var url2 =  "http://www.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?bbo=" + bounds+ "&itemsPerPage=500&page=1";
         $("#json").val(url);
         $("#rss").val(url2 + "&format=rss");
@@ -136,7 +136,7 @@
                     markers.removeLayer(geojson);
                     geojson = null;
                 }
-                $('#total').html("These are " + data.length + " farms out of " + request.getResponseHeader('Pagination-Count'));
+                $('#total').html("These are " + data.length + " photos out of " + request.getResponseHeader('Pagination-Count'));
                 geojson = L.geoJson(data, {
                     onEachFeature: function (feature, layer) {
                         var popup = L.popup({
