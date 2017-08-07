@@ -19,6 +19,9 @@
             integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
             crossorigin=""></script>
     <script src="js/leaflet.markercluster-src.js"></script>
+    <script src="js/spin.min.js"></script>
+    <script src="js/leaflet.spin.min.js"></script>
+
 
     <!-- CLIPBOARD -->
     <script src="js/clipboard.min.js"></script>
@@ -131,6 +134,9 @@
         xhr = $.ajax({
             dataType: "json",
             url: "rest/api/dsfl?bbo=" + bounds + "&itemsPerPage=500",
+            beforeSend: function(){
+                map.spin(true);
+            },
             success: function (data, textStatus, request) {
                 if (geojson != null) {
                     markers.removeLayer(geojson);
@@ -150,6 +156,9 @@
                 if (geojson != null) {
                     markers.addLayer(geojson);
                 }
+            },
+            complete:function(){
+                map.spin(false);
             }
         });
     }
