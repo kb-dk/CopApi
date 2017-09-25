@@ -66,6 +66,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index.jsp">DSFL</a></li>
                 <li><a href="cop.html">COP</a></li>
+                <li><a href="adl.html">ADL</a></li>
                 <li><a href="swagger">Documentation</a></li>
             </ul>
         </div>

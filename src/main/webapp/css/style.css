@@ -119,3 +119,10 @@ div.desc {
 #map {
     height: 680px;
 }
+
+.plain-text{
+    word-wrap: normal;
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+}
