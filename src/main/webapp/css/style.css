@@ -7,6 +7,9 @@ body {
     border: 1px solid #ffc1a7;
     border-radius: 4px;
 }
+.form-group{
+    margin-top: 10px;
+}
 
 .light-theme .current {
     background: #ffc1a7;
