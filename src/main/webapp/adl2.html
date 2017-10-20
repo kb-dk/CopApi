@@ -1,0 +1,268 @@
+<html>
+<head>
+    <title>KB API Demo</title>
+    <meta charset="utf-8"/>
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <!-- PAGINATION -->
+    <script type="text/javascript" src="js/jquery.simplePagination.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/simplePagination.css"/>
+
+    <!-- CLIPBOARD -->
+    <script src="js/clipboard.min.js"></script>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.jsp">DSFL</a></li>
+                <li><a href="cop.html">COP</a></li>sdfdsfds
+                <li><a href="adl.html">ADL</a></li>
+                <li class="active"><a href="adl2.html">ADL2</a></li>
+                <li><a href="swagger">Documentation</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="starter-template">
+        <div class="row">
+            <form id="form" class="form-inline" action="http://index-prod-01.kb.dk:8983/solr/adl-core/select/?q" target="_blank">
+
+                <div class="form-group">
+                    <input type="text" placeholder="Search (comma separated)" class="form-control" id="query" name="q">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="id of a work or volume" class="form-control" id="part_of_ssim" name="part_of_ssim">
+                </div>
+                <div class="form-group">
+                    <select class="selectpicker form-control" name="cat_ssi" id="cat_ssi">
+                        <option value="">Select a category</option>
+                        <option value="editorial">editorial</option>
+                        <option value="work">work</option>
+                        <option value="author">author</option>
+                        <option value="volume">volume</option>
+                        <option value="period">period</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select class="selectpicker form-control" name="type_ssi" id="type_ssi">
+                        <option value="">Select a type</option>
+                        <option value="trunk">trunk</option>
+                        <option value="leaf">leaf</option>
+                        <option value="work">work</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select class="selectpicker form-control" name="genre_ssi" id="genre_ssi">
+                        <option value="">Select a genre</option>
+                        <option value="prose">prose</option>
+                        <option value="play">play</option>
+                        <option value="poetry">poetry</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select class="selectpicker form-control" name="subcollection_ssi" id="subcollection_ssi">
+                        <option value="">Select a sub collection</option>
+                        <option value="authors">authors</option>
+                        <option value="periods">periods</option>
+                        <option value="texts">texts</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select class="selectpicker form-control" name="sort" id="sort">
+                        <option value="position_ssi asc">Sort by the order in the book</option>
+                        <option value="">Sort by relevance</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+
+                    <input type="text"  class="form-control" id="start" name="start" value="0">
+                </div>
+                <div class="form-group">
+
+                    <input type="text"  class="form-control" id="rows" name="rows" value="10">
+                </div>
+
+                <input name="indent" type="hidden" value="on"/>
+                <input name="defType" type="hidden" value="edismax"/>
+
+
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+        <div id="url">
+            <div class="input-group">
+                <span class="input-group-addon input-group-addon-text">JSON</span>
+                <input id="json" class="form-control url" placeholder="Use the search bar to get URL">
+                <span class="btn input-group-addon" data-clipboard-target="#json">
+                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
+                        </span>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon input-group-addon-text">XML</span>
+                <input id="xml" class="form-control url" placeholder="Use the search bar to get URL">
+                <span class="btn input-group-addon" data-clipboard-target="#xml">
+                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
+                        </span>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon input-group-addon-text">CSV</span>
+                <input id="csv" class="form-control url" placeholder="Use the search bar to get URL">
+                <span class="btn input-group-addon" data-clipboard-target="#csv">
+                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
+                </span>
+            </div>
+
+        </div>
+        <br>
+        <div id="total" class="total"></div>
+        <div class="pagination"></div>
+        <div id="content"></div>
+    </div>
+</div>
+</body>
+
+<script>
+    var pagination;
+    var xhr;
+    function getData(currentPage) {
+        //Display the url
+        addAnd = false;
+        var queryParameters=[];
+        var url = "http://index-prod-01.kb.dk:8983/solr/adl-core/select/?q=";
+        if ($('#query').val() != ''){queryParameters.push($('#query').val());}
+        if ($('#part_of_ssim').val() != ''){queryParameters.push("part_of_ssim:" + $('#part_of_ssim').val());}
+        if ($('#cat_ssi').val() != ''){queryParameters.push("cat_ssi:" + $('#cat_ssi').val());}
+        if ($('#type_ssi').val() != ''){queryParameters.push("type_ssi:" + $('#type_ssi').val());}
+        if ($('#genre_ssi').val() != ''){queryParameters.push("genre_ssi:" + $('#genre_ssi').val());}
+        if ($('#subcollection_ssi').val() != ''){queryParameters.push("subcollection_ssi:" + $('#subcollection_ssi').val());}
+
+        url = url + queryParameters.join(' and ') + "&sort=" + ($('#sort').val()) + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
+
+
+//        console.log(queryParameters.join(' and '));
+
+//            + " and part_of_ssim:" + $('#part_of_ssim').val()
+//            + " and cat_ssi:" + $('#cat_ssi').val()
+//            + " and type_ssi:" + $('#type_ssi').val()
+//            + " and genre_ssi:" + $('#type_ssi').val();
+
+        var url2 = "http://index-prod-01.kb.dk:8983/solr/adl-core/select/?q" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
+        $("#json").val(url + "&wt=json&indent=on");
+        $("#xml").val(url + "&wt=xml&indent=on");
+        $("#csv").val(url + "&wt=csv&indent=on");
+
+        //Abort on new request
+        if (xhr != null) {
+            xhr.abort();
+        }
+        //Get data
+        xhr = $.ajax({
+            dataType: "json",
+            url: url,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data, textStatus, response) {
+                $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
+                var html = '';
+                $.each(data, function (i, row) {
+                    html += ' <div class="responsive"><div class="gallery">' +
+                        '<a target="_blank" href="' + row['link'] + '/da">' +
+                        '<img src="' + row['imageURI'] + '"></a> ' +
+                        '<div class="desc">' + row['title'] + '</div>' +
+                        '</div>' +
+                        '</div>';
+                });
+                $('#content').html(html);
+                //initialise the pagination
+                if (pagination == null) {
+                    initializePagination(response.getResponseHeader('Pagination-Count'));
+                }
+            },
+            error: function () {
+                $('#content').html('<div class="alert alert-info"><strong>Sorry</strong> No data available, have you selected an edition?</div>');
+            }
+        });
+    }
+    ;
+
+    function initializePagination(totalPage) {
+        if (pagination != null && totalPage != pagination.pagination('getPagesCount')) {
+            pagination.pagination('updateItems', totalPage);
+        } else {
+            pagination = $('.pagination').pagination({
+                pages: totalPage,
+                cssStyle: 'light-theme',
+                onPageClick: function (pageNumber, event) {
+                    getData(pageNumber);
+                }
+            });
+        }
+    }
+    function getNewDate(year, month, picker){
+        var daysInMonth = new Date(year, month, 0).getDate();
+        var oldDate = picker.datepicker('getDate');
+        if (oldDate != null){
+            var oldDay = oldDate.getDate();
+            if (oldDay > daysInMonth)
+                oldDay = daysInMonth;
+            var newDate = new Date(year, month - 1, oldDay, 0, 0, 0);
+        }else{
+            var newDate = new Date(year, month - 1, 1, 0, 0, 0);
+        }
+        picker.datepicker('setDate', newDate);
+    }
+    $(document).ready(function () {
+        $("#form").submit(function (event) {
+            pagination = null;
+            getData(1);
+            event.preventDefault();
+        });
+        // initialise the copy to clipboard
+        new Clipboard('.btn');
+
+    });
+</script>
+
+</html>
