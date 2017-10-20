@@ -14,10 +14,6 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
 
-    <!-- PAGINATION -->
-    <script type="text/javascript" src="js/jquery.simplePagination.js"></script>
-    <link type="text/css" rel="stylesheet" href="css/simplePagination.css"/>
-
     <!-- CLIPBOARD -->
     <script src="js/clipboard.min.js"></script>
 
@@ -156,106 +152,44 @@
             </div>
 
         </div>
-        <br>
-        <div id="total" class="total"></div>
-        <div class="pagination"></div>
-        <div id="content"></div>
     </div>
 </div>
 </body>
 
 <script>
-    var pagination;
-    var xhr;
     function getData(currentPage) {
         //Display the url
         addAnd = false;
-        var queryParameters=[];
+        var queryParameters = [];
         var url = "http://index-prod-01.kb.dk:8983/solr/adl-core/select/?q=";
-        if ($('#query').val() != ''){queryParameters.push($('#query').val());}
-        if ($('#part_of_ssim').val() != ''){queryParameters.push("part_of_ssim:" + $('#part_of_ssim').val());}
-        if ($('#cat_ssi').val() != ''){queryParameters.push("cat_ssi:" + $('#cat_ssi').val());}
-        if ($('#type_ssi').val() != ''){queryParameters.push("type_ssi:" + $('#type_ssi').val());}
-        if ($('#genre_ssi').val() != ''){queryParameters.push("genre_ssi:" + $('#genre_ssi').val());}
-        if ($('#subcollection_ssi').val() != ''){queryParameters.push("subcollection_ssi:" + $('#subcollection_ssi').val());}
+        if ($('#query').val() != '') {
+            queryParameters.push($('#query').val());
+        }
+        if ($('#part_of_ssim').val() != '') {
+            queryParameters.push("part_of_ssim:" + $('#part_of_ssim').val());
+        }
+        if ($('#cat_ssi').val() != '') {
+            queryParameters.push("cat_ssi:" + $('#cat_ssi').val());
+        }
+        if ($('#type_ssi').val() != '') {
+            queryParameters.push("type_ssi:" + $('#type_ssi').val());
+        }
+        if ($('#genre_ssi').val() != '') {
+            queryParameters.push("genre_ssi:" + $('#genre_ssi').val());
+        }
+        if ($('#subcollection_ssi').val() != '') {
+            queryParameters.push("subcollection_ssi:" + $('#subcollection_ssi').val());
+        }
 
         url = url + queryParameters.join(' and ') + "&sort=" + ($('#sort').val()) + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
-
-//        console.log(queryParameters.join(' and '));
-
-//            + " and part_of_ssim:" + $('#part_of_ssim').val()
-//            + " and cat_ssi:" + $('#cat_ssi').val()
-//            + " and type_ssi:" + $('#type_ssi').val()
-//            + " and genre_ssi:" + $('#type_ssi').val();
-
-        var url2 = "http://index-prod-01.kb.dk:8983/solr/adl-core/select/?q" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
         $("#json").val(url + "&wt=json&indent=on");
         $("#xml").val(url + "&wt=xml&indent=on");
         $("#csv").val(url + "&wt=csv&indent=on");
+    }
 
-        //Abort on new request
-        if (xhr != null) {
-            xhr.abort();
-        }
-        //Get data
-        xhr = $.ajax({
-            dataType: "json",
-            url: url,
-            contentType: 'application/json; charset=utf-8',
-            success: function (data, textStatus, response) {
-                $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
-                var html = '';
-                $.each(data, function (i, row) {
-                    html += ' <div class="responsive"><div class="gallery">' +
-                        '<a target="_blank" href="' + row['link'] + '/da">' +
-                        '<img src="' + row['imageURI'] + '"></a> ' +
-                        '<div class="desc">' + row['title'] + '</div>' +
-                        '</div>' +
-                        '</div>';
-                });
-                $('#content').html(html);
-                //initialise the pagination
-                if (pagination == null) {
-                    initializePagination(response.getResponseHeader('Pagination-Count'));
-                }
-            },
-            error: function () {
-                $('#content').html('<div class="alert alert-info"><strong>Sorry</strong> No data available, have you selected an edition?</div>');
-            }
-        });
-    }
-    ;
-
-    function initializePagination(totalPage) {
-        if (pagination != null && totalPage != pagination.pagination('getPagesCount')) {
-            pagination.pagination('updateItems', totalPage);
-        } else {
-            pagination = $('.pagination').pagination({
-                pages: totalPage,
-                cssStyle: 'light-theme',
-                onPageClick: function (pageNumber, event) {
-                    getData(pageNumber);
-                }
-            });
-        }
-    }
-    function getNewDate(year, month, picker){
-        var daysInMonth = new Date(year, month, 0).getDate();
-        var oldDate = picker.datepicker('getDate');
-        if (oldDate != null){
-            var oldDay = oldDate.getDate();
-            if (oldDay > daysInMonth)
-                oldDay = daysInMonth;
-            var newDate = new Date(year, month - 1, oldDay, 0, 0, 0);
-        }else{
-            var newDate = new Date(year, month - 1, 1, 0, 0, 0);
-        }
-        picker.datepicker('setDate', newDate);
-    }
     $(document).ready(function () {
         $("#form").submit(function (event) {
-            pagination = null;
             getData(1);
             event.preventDefault();
         });
