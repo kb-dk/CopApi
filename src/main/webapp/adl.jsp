@@ -37,31 +37,9 @@
 
 <body id="therootelement">
 
-
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"></a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="index.jsp">DSFL</a></li>
-                <li><a href="cop.html">COP</a></li>
-                <li class="active"><a href="adl.html">ADL</a></li>
-                <li><a href="adl2.html">ADL2</a></li>
-                <li><a href="swagger">Documentation</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<jsp:include page="header.jsp">
+    <jsp:param name="active" value="adl"/>
+</jsp:include>
 
 <div class="container">
     <div style="float:left;width:30%;margin-right: 15px;">
@@ -76,7 +54,7 @@
             <a href="https://github.com/Det-Kongelige-Bibliotek/access-digital-objects/blob/master/README.md#caveats">Caveats</a>
         </p>
 
-        <form id="form" action="http://index-prod-01.kb.dk:8983/solr/adl-core/select/" target="_blank">
+        <form id="form" action="http://index-prod-01.kb.dk:8983/solr/adl-core/select/adl.jsp" target="_blank">
             <dl>
                 <dt>Search for</dt>
                 <dd>
