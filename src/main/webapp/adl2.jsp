@@ -146,7 +146,7 @@
         //Display the url
         addAnd = false;
         var queryParameters = [];
-        var url = "http://index.kb.dk/solr/adl-core/select/?q=";
+        var url = "/rest/api/adl?q=";
         if ($('#query').val() != '') {
             queryParameters.push($('#query').val());
         }
@@ -166,7 +166,9 @@
             queryParameters.push("subcollection_ssi:" + $('#subcollection_ssi').val());
         }
 
-        url = url + queryParameters.join(' and ') + "&sort=" + ($('#sort').val()) + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
+
+        url = url + queryParameters.join(' and ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
+        console.log(url);
 
         $("#json").val(url + "&wt=json&indent=on");
         $("#xml").val(url + "&wt=xml&indent=on");
