@@ -17,7 +17,10 @@ import javax.ws.rs.core.Response;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
+import java.io.*;
+import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +31,12 @@ import java.util.List;
 public class API {
 
 
+
     private String copURL = "http://www.kb.dk/cop/syndication";
     private String dsflURL = "http://www.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
     private String contentURL = "http://www.kb.dk/cop/content";
     private String navigationURL = "http://www.kb.dk/cop/navigation";
+    private String adlURL = "http://index.kb.dk/solr/adl-core/select/";
 
     @GET
     @ApiOperation(value = "Get the list of editions and retrieve the identifier of the edition, it is needed for any other call ",
@@ -142,7 +147,7 @@ public class API {
             editions.add(edition);
         }
 
-        int total = Integer.parseInt(totalResults)/Integer.parseInt(itemsPerPage);
+        int total = Integer.parseInt(totalResults) / Integer.parseInt(itemsPerPage);
         return Response.status(200).
                 entity(editions).
                 header("Total", totalResults).
@@ -163,9 +168,65 @@ public class API {
             throws Exception {
 
         URLReader reader = new URLReader();
-        String url = contentURL  + identifier +  objectId;
+        String url = contentURL + identifier + objectId;
         Document xmlDocument = reader.getDocument(url);
         return Response.status(200).entity(xmlDocument).build();
+    }
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    @GET
+    @ApiOperation(value = "Get the content of adl core from solr ",
+            response = API.class)
+    @Path("adl/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getADLContent(
+            @ApiParam(value = "q", name = "q", required = true) @QueryParam("q") String q,
+            @ApiParam(value = "start", name = "start", required = false) @QueryParam("start") String start,
+            @ApiParam(value = "defType", name = "defType", required = false) @QueryParam("defType") String defType,
+            @ApiParam(value = "indent", name = "indent", required = false) @QueryParam("indent") String indent,
+            @ApiParam(value = "sort", name = "sort", required = false) @QueryParam("sort") String sort,
+            @ApiParam(value = "rows", name = "rows", required = false) @QueryParam("rows") String rows)
+            throws Exception {
+
+        URLReader reader = new URLReader();
+        String url = adlURL + "?q=" + q;
+
+        if (start != null) {
+            url += "&start=" + start;
+        }
+
+        if (rows != null) {
+            url += "&rows=" + rows;
+        }
+
+        if (defType != null) {
+            url += "&defType=" + defType;
+        }
+
+        if (indent != null) {
+            url += "&indent=" + indent;
+        }
+
+        if (sort != null) {
+            url += "&sort=" + sort;
+        }
+
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            return Response.status(200).entity(jsonText).build();
+        } finally {
+            is.close();
+        }
     }
 
     @GET
