@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>KB API Demo</title>
+    <link rel="shortcut icon"  href="favicon.ico" />
 
     <!-- LEAFLET -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
