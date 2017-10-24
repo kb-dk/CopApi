@@ -132,17 +132,21 @@
                 </span>
             </div>
 
+            <br/>
+            <div id="content"></div>
+
         </div>
     </div>
 </div>
 </body>
 
 <script>
+    var xhr;
     function getData(currentPage) {
         //Display the url
         addAnd = false;
         var queryParameters = [];
-        var url = "http://index-prod-01.kb.dk:8983/solr/adl-core/select/?q=";
+        var url = "http://index.kb.dk/solr/adl-core/select/?q=";
         if ($('#query').val() != '') {
             queryParameters.push($('#query').val());
         }
@@ -167,6 +171,29 @@
         $("#json").val(url + "&wt=json&indent=on");
         $("#xml").val(url + "&wt=xml&indent=on");
         $("#csv").val(url + "&wt=csv&indent=on");
+
+        //Get data
+        xhr = $.ajax({
+            dataType: "json",
+            url: url,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data, textStatus, response) {
+                $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
+                var html = '';
+                $.each(data, function (i, row) {
+                    html += ' <div class="responsive"><div class="gallery">' +
+                        '<a target="_blank" href="' + row['link'] + '/da">' +
+                        '<img src="' + row['imageURI'] + '"></a> ' +
+                        '<div class="desc">' + row['title'] + '</div>' +
+                        '</div>' +
+                        '</div>';
+                });
+                $('#content').html(html);
+            },
+            error: function () {
+                $('#content').html('<div class="alert alert-info"><strong>Sorry</strong> No data available</div>');
+            }
+        });
     }
 
     $(document).ready(function () {
