@@ -95,18 +95,18 @@
 
                 <div class="form-group">
 
-                    <input type="text"  class="form-control" id="start" name="start" value="0">
+                    <input type="text"  class="small form-control" id="start" name="start" value="0">
                 </div>
                 <div class="form-group">
 
-                    <input type="text"  class="form-control" id="rows" name="rows" value="10">
+                    <input type="text"  class="small form-control" id="rows" name="rows" value="10">
                 </div>
 
                 <input name="indent" type="hidden" value="on"/>
                 <input name="defType" type="hidden" value="edismax"/>
 
 
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="space_on_top btn btn-default">Submit</button>
             </form>
         </div>
         <div id="url">
