@@ -43,6 +43,11 @@
             <form id="form" class="form-inline" action="http://index-prod-01.kb.dk:8983/solr/adl-core/select/?q" target="_blank">
 
                 <div class="form-group">
+                    <select class="selectpicker form-control" name="author_name_tesim" id="Authors">
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <input type="text" placeholder="Search (comma separated)" class="form-control" id="query" name="q">
                 </div>
                 <div class="form-group">
@@ -74,15 +79,6 @@
                         <option value="prose">prose</option>
                         <option value="play">play</option>
                         <option value="poetry">poetry</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <select class="selectpicker form-control" name="subcollection_ssi" id="subcollection_ssi">
-                        <option value="">Select a sub collection</option>
-                        <option value="authors">authors</option>
-                        <option value="periods">periods</option>
-                        <option value="texts">texts</option>
                     </select>
                 </div>
 
@@ -162,8 +158,8 @@
         if ($('#genre_ssi').val() != '') {
             queryParameters.push("genre_ssi:" + $('#genre_ssi').val());
         }
-        if ($('#subcollection_ssi').val() != '') {
-            queryParameters.push("subcollection_ssi:" + $('#subcollection_ssi').val());
+        if ($('#Authors').val() != '') {
+            queryParameters.push("author_name_tesim:" + $('#Authors').val());
         }
 
 
@@ -182,13 +178,24 @@
             success: function (data, textStatus, response) {
                 $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
                 var html = '';
-                $.each(data, function (i, row) {
-                    html += ' <div class="responsive"><div class="gallery">' +
-                        '<a target="_blank" href="' + row['link'] + '/da">' +
-                        '<img src="' + row['imageURI'] + '"></a> ' +
-                        '<div class="desc">' + row['title'] + '</div>' +
-                        '</div>' +
-                        '</div>';
+                console.log(data.response);
+
+                $.each(data.response.docs, function (i, row) {
+//                    html += ' <div class="responsive"><div class="gallery">' +
+//                        '<a target="_blank" href="' + row['link'] + '/da">' +
+//                        '<img src="' + row['imageURI'] + '"></a> ' +
+//                        '<div class="desc">' + row['title'] + '</div>' +
+//                        '</div>' +
+//                        '</div>';
+                    html += '<div class="document">';
+                    if (row.work_title_tesim != null) {html += "<b>Title: </b>" + row.work_title_tesim.join(" ");}
+                    html += '<br/>';
+                    if (row.text_tesim != null) {html += "<b>Text: </b>" + row.text_tesim.join(" ");}
+                    html += '</div>';
+                    //html += '<div class="responsive">'+row.id+'</div>';
+                    //console.log(data.response);
+                    console.log('*');
+
                 });
                 $('#content').html(html);
             },
@@ -198,7 +205,33 @@
         });
     }
 
+    function getAuthors() {
+        $.ajax({
+            dataType: "json",
+            url: "/rest/api/adl?q=cat_ssi:author and type_ssi:work&sort=sort_title_ssi asc&wt=json&rows=75",
+            success: function (data) {
+                console.log(data.response.docs);
+                var html = ' <option value="">Select an author</option>';
+                $.each(data.response.docs, function (i, row) {
+                    console.log(row['sort_title_ssi']);
+
+                    html += ' <option value="' + row['work_title_tesim'] + '">' + titleCase(row['sort_title_ssi']) + '</option>';
+                });
+                $('#Authors').html(html);
+            }
+        });
+    }
+    function titleCase(str) {
+        str = str.toLowerCase().split(' ');
+        for (var i = 0; i < str.length; i++) {
+            str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+        }
+        return str.join(' ');
+    }
+    //titleCase("I'm a little tea pot");
+
     $(document).ready(function () {
+        getAuthors();
         $("#form").submit(function (event) {
             getData(1);
             event.preventDefault();

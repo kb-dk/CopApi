@@ -10,6 +10,16 @@ body {
 .form-group, .space_on_top{
     margin-top: 10px;
 }
+.document {
+    border: thin solid #f2eee2;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 10px;
+    margin-top: 0;
+    background-color: rgba(242,238,226,0.5);
+    text-align: left;
+}
+
 .small{
     width: 75px !important;
 }
