@@ -197,7 +197,7 @@ public class API {
             throws Exception {
 
         URLReader reader = new URLReader();
-        String url = adlURL + "?q=" + q + "&wt=json";
+        String url = adlURL + "?q=" + URLEncoder.encode(q, "UTF-8") + "&wt=json";
 
         if (start != null) {
             url += "&start=" + start;
@@ -216,7 +216,7 @@ public class API {
         }
 
         if (sort != null) {
-            url += "&sort=" + sort;
+            url += "&sort=" + URLEncoder.encode(sort, "UTF-8");
         }
 
         InputStream is = new URL(url).openStream();
