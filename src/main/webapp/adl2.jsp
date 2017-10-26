@@ -42,23 +42,22 @@
         <div class="row">
             <form id="form" class="form-inline" action="http://index-prod-01.kb.dk:8983/solr/adl-core/select/?q" target="_blank">
 
+                <div class="form-group big_search_box">
+                    <input type="text" placeholder="Search" class="form-control" id="query" name="q">
+                </div>
                 <div class="form-group">
-                    <select class="selectpicker form-control" name="author_name_tesim" id="Authors">
+                    <select class="selectpicker form-control" name="author_nasim" id="Authors">
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <input type="text" placeholder="Search (comma separated)" class="form-control" id="query" name="q">
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="id of a work or volume" class="form-control" id="part_of_ssim" name="part_of_ssim">
-                </div>
+                <%--<div class="form-group">--%>
+                    <%--<select class="selectpicker form-control" name="author_nasim" id="Volumes">--%>
+                    <%--</select>--%>
+                <%--</div>--%>
                 <div class="form-group">
                     <select class="selectpicker form-control" name="cat_ssi" id="cat_ssi">
                         <option value="">Select a category</option>
                         <option value="editorial">editorial</option>
                         <option value="work">work</option>
-                        <option value="author">author</option>
                         <option value="volume">volume</option>
                         <option value="period">period</option>
                     </select>
@@ -146,9 +145,9 @@
         if ($('#query').val() != '') {
             queryParameters.push($('#query').val());
         }
-        if ($('#part_of_ssim').val() != '') {
-            queryParameters.push("part_of_ssim:" + $('#part_of_ssim').val());
-        }
+//        if ($('#part_of_ssim').val() != '') {
+//            queryParameters.push("part_of_ssim:" + $('#part_of_ssim').val());
+//        }
         if ($('#cat_ssi').val() != '') {
             queryParameters.push("cat_ssi:" + $('#cat_ssi').val());
         }
@@ -181,20 +180,19 @@
                 console.log(data.response);
 
                 $.each(data.response.docs, function (i, row) {
-//                    html += ' <div class="responsive"><div class="gallery">' +
-//                        '<a target="_blank" href="' + row['link'] + '/da">' +
-//                        '<img src="' + row['imageURI'] + '"></a> ' +
-//                        '<div class="desc">' + row['title'] + '</div>' +
-//                        '</div>' +
-//                        '</div>';
-                    html += '<div class="document">';
-                    if (row.work_title_tesim != null) {html += "<b>Title: </b>" + row.work_title_tesim.join(" ");}
-                    html += '<br/>';
-                    if (row.text_tesim != null) {html += "<b>Text: </b>" + row.text_tesim.join(" ");}
+                    console.log(row);
+                    //debugger;
+                    url = "http://adl.kb.dk/solr_documents/";
+                    if(row.type_ssi == 'leaf' && row.part_of_ssim){url += row.part_of_ssim[0] + '#' + row.page_id_ssi; } else { if(row.type_ssi == 'leaf'){url="";}else{url += row.id;}}
+                    console.log(url);
+                    if (url != ""){html += '<a href="' + url + '" target="_blank">';}
+                    html += '<div class="document">' ;
+                    if (row.work_title_tesim != null) {html += "<div><b>Title: </b>" + row.work_title_tesim.join(" ")+"</div>";}
+                    if (row.author_nasim != null) {html += "<div><b>Volume title: </b>" + row.volume_title_tesim.join(" ")+"</div>";}
+                    if (row.volume_title_tesim != null) {html += "<div><b>Author: </b>" + row.author_nasim.join(" ")+"</div>";}
+                    if (row.text_tesim != null) {html += "<div class='text'><b>Text: </b>" + row.text_tesim.join(" ")+"</div>";}
                     html += '</div>';
-                    //html += '<div class="responsive">'+row.id+'</div>';
-                    //console.log(data.response);
-                    console.log('*');
+                    if (url != ""){html += '</a>';}
 
                 });
                 $('#content').html(html);

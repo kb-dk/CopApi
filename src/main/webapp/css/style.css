@@ -19,7 +19,25 @@ body {
     background-color: rgba(242,238,226,0.5);
     text-align: left;
 }
-
+.big_search_box{
+    width:100%;
+}
+.big_search_box .form-control{
+    width: 50%;
+}
+.text{
+    max-height: 100px;
+    overflow: hidden;
+}
+a, a:hover{
+    color: #333;
+}
+a:hover{
+    text-decoration: none;
+}
+a:hover>div{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.09);
+}
 .small{
     width: 75px !important;
 }
