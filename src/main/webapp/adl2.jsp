@@ -213,7 +213,6 @@
                 console.log(data.response.docs);
                 var html = ' <option value="">Select an author</option>';
                 $.each(data.response.docs, function (i, row) {
-                    console.log(row['sort_title_ssi']);
 
                     html += ' <option value="' + row['work_title_tesim'] + '">' + titleCase(row['sort_title_ssi']) + '</option>';
                 });
