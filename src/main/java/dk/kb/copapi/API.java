@@ -188,12 +188,24 @@ public class API {
     @Path("adl/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getADLContent(
-            @ApiParam(value = "q", name = "q", required = true) @QueryParam("q") String q,
-            @ApiParam(value = "start", name = "start", required = false) @QueryParam("start") String start,
-            @ApiParam(value = "defType", name = "defType", required = false) @QueryParam("defType") String defType,
-            @ApiParam(value = "indent", name = "indent", required = false) @QueryParam("indent") String indent,
-            @ApiParam(value = "sort", name = "sort", required = false) @QueryParam("sort") String sort,
-            @ApiParam(value = "rows", name = "rows", required = false) @QueryParam("rows") String rows)
+            @ApiParam(value = "Query comprised of <b>id</b>, <b>cat_ssi</b>, <b>type_ssi</b>, <b>genre_ssi</b>, <b>work_title_tesim</b>, <b>volume_title_tesim</b>, <b>author_name_tesim</b>, <b>text_tesim</b> and more which are separeted with 'and'."+
+                              "<br/> <b>id</b> is the ID of the record. It is the TEI file base name, or, unless the record isn't referring to a volume, constructed as a string concatenation of that basename with the sequence of xml:ids identifying the uniq xpath to the content indexed."+
+                              "<br/> <b>cat_ssi</b> can be an empty string or 'work' and is the category of a text. Use when limiting searches to works, omit otherwise."+
+                              "<br/> <b>type_ssi</b> can be 'trunk' or 'leaf' and is Node type in document. A trunk node can be a whole work, a chapter etc, whereas a leaf could a paragraph of prose, a stanza (or strophe) of poetry or a speak in a dialog in a scenic work. "+
+                              "<br/> <b>genre_ssi</b> can be 'prose', 'poetry' or 'play' and is genre of a leaf node. Note that this is not the genre of a work, but the structure of the paragraph level markup."+
+                              "<br/> <b>work_title_tesim</b>, <b>volume_title_tesim</b>, <b>author_name_tesim</b> and <b>text_tesim</b> are metadata fields. There are more of them, but they should be self explanatory."+
+                              "<br/> <b>Examples:</b>"+
+                              "<br/>To find all works: q=cat_ssi:work"+
+                              "<br/>To find all works by 'Gustaf Munch-Petersen': q=author_name_tesim:munch and cat_ssi:work"+
+                              "<br/>To find all texts in dialogs (<sp> elements) in ADL, written by someone called 'Jeppe': q=genre_ssi:play and author_name_tesim:jeppe"+
+                              "<br/>To find all texts in dialogs (<sp> elements) in ADL, spoken by a character named 'Jeppe': q=genre_ssi:play and speaker_tesim:jeppe"+
+                              "<br/>To find all strophes of poetry containing the words hjerte and smerte (heart and agony): q=type_ssi:leaf and genre_ssi:poetry and author_name_tesim:grundtvig and text_tesim:hjerte and text_tesim:smerte"+
+                              "<br/>To what characters in the plays by Holberg talks about Mester Erich: q=genre_ssi:play and text_tesim:mester erich and author_name_tesim:holberg", name = "q", required = false) @QueryParam("q") String q,
+            @ApiParam(value = "Start record", name = "start", required = false) @QueryParam("start") String start,
+            @ApiParam(value = "Number of records to retrieve", name = "rows", required = false) @QueryParam("rows") String rows,
+            @ApiParam(value = "defType can be 'dismax' or 'edismax' and is the query parser.", name = "defType", required = false) @QueryParam("defType") String defType,
+            @ApiParam(value = "indent can be 'on' or 'off' and is the indentation of the result", name = "indent", required = false) @QueryParam("indent") String indent,
+            @ApiParam(value = "Sort can be empty string or 'position_isi'. position_isi is the the position of the current node along the sibling axis of the document. Sorting with respect to this field will guarantee that the result is presented in document order.", name = "sort", required = false) @QueryParam("sort") String sort)
             throws Exception {
 
         URLReader reader = new URLReader();

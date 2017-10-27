@@ -59,18 +59,16 @@
                         <option value="editorial">editorial</option>
                         <option value="work">work</option>
                         <option value="volume">volume</option>
-                        <option value="period">period</option>
+                        <option value="leaf">leaf</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <select class="selectpicker form-control" name="type_ssi" id="type_ssi">
-                        <option value="">Select a type</option>
-                        <option value="trunk">trunk</option>
-                        <option value="leaf">leaf</option>
-                        <option value="work">work</option>
-                    </select>
-                </div>
+                <%--<div class="form-group">--%>
+                    <%--<select class="selectpicker form-control" name="type_ssi" id="type_ssi">--%>
+                        <%--<option value="">Select a type</option>--%>
+                        <%--<option value="trunk">trunk</option>--%>
+                    <%--</select>--%>
+                <%--</div>--%>
 
                 <div class="form-group">
                     <select class="selectpicker form-control" name="genre_ssi" id="genre_ssi">
@@ -148,12 +146,17 @@
 //        if ($('#part_of_ssim').val() != '') {
 //            queryParameters.push("part_of_ssim:" + $('#part_of_ssim').val());
 //        }
+
         if ($('#cat_ssi').val() != '') {
-            queryParameters.push("cat_ssi:" + $('#cat_ssi').val());
+            if ($('#cat_ssi').val() == 'leaf') {
+                queryParameters.push("type_ssi:" + $('#cat_ssi').val());
+            }else {
+                queryParameters.push("cat_ssi:" + $('#cat_ssi').val());
+            }
         }
-        if ($('#type_ssi').val() != '') {
-            queryParameters.push("type_ssi:" + $('#type_ssi').val());
-        }
+//        if ($('#type_ssi').val() != '') {
+//            queryParameters.push("type_ssi:" + $('#type_ssi').val());
+//        }
         if ($('#genre_ssi').val() != '') {
             queryParameters.push("genre_ssi:" + $('#genre_ssi').val());
         }
@@ -163,7 +166,6 @@
 
 
         url = url + queryParameters.join(' and ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
-        console.log(url);
 
         $("#json").val(url + "&wt=json&indent=on");
         $("#xml").val(url + "&wt=xml&indent=on");
@@ -177,14 +179,11 @@
             success: function (data, textStatus, response) {
                 $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
                 var html = '';
-                console.log(data.response);
 
                 $.each(data.response.docs, function (i, row) {
-                    console.log(row);
                     //debugger;
                     url = "http://adl.kb.dk/solr_documents/";
                     if(row.type_ssi == 'leaf' && row.part_of_ssim){url += row.part_of_ssim[0] + '#' + row.page_id_ssi; } else { if(row.type_ssi == 'leaf'){url="";}else{url += row.id;}}
-                    console.log(url);
                     if (url != ""){html += '<a href="' + url + '" target="_blank">';}
                     html += '<div class="document">' ;
                     if (row.work_title_tesim != null) {html += "<div><b>Title: </b>" + row.work_title_tesim.join(" ")+"</div>";}
@@ -208,7 +207,6 @@
             dataType: "json",
             url: "/rest/api/adl?q=cat_ssi:author and type_ssi:work&sort=sort_title_ssi asc&wt=json&rows=75",
             success: function (data) {
-                console.log(data.response.docs);
                 var html = ' <option value="">Select an author</option>';
                 $.each(data.response.docs, function (i, row) {
 
@@ -235,6 +233,18 @@
         });
         // initialise the copy to clipboard
         new Clipboard('.btn');
+
+        $("#cat_ssi").change(function() {
+
+            var el = $(this) ;
+
+            if(el.val() == "leaf" || el.val() == "" ) {
+                $("#genre_ssi").show();
+            }
+            else {
+                $("#genre_ssi").hide();
+            }
+        });
 
     });
 </script>
