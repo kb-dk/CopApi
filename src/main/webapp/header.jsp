@@ -17,7 +17,6 @@
                 <li <c:if test = "${param.active=='dsfl'}"> class="active" </c:if>><a href="index.jsp">DSFL</a></li>
                 <li <c:if test = "${param.active=='cop'}"> class="active" </c:if>><a href="cop.jsp">COP</a></li>sdfdsfds
                 <li <c:if test = "${param.active=='adl'}"> class="active" </c:if>><a href="adl.jsp">ADL</a></li>
-                <li <c:if test = "${param.active=='adl2'}"> class="active" </c:if>><a href="adl2.jsp">ADL2</a></li>
                 <li <c:if test = "${param.active=='documentation'}"> class="active" </c:if>><a href="swagger">Documentation</a></li>
             </ul>
         </div>
