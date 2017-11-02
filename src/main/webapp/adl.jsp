@@ -49,10 +49,7 @@
                     <select class="selectpicker form-control" name="author_nasim" id="Authors">
                     </select>
                 </div>
-                <%--<div class="form-group">--%>
-                    <%--<select class="selectpicker form-control" name="author_nasim" id="Volumes">--%>
-                    <%--</select>--%>
-                <%--</div>--%>
+
                 <div class="form-group">
                     <select class="selectpicker form-control" name="cat_ssi" id="cat_ssi">
                         <option value="">Select a category</option>
@@ -62,13 +59,6 @@
                         <option value="leaf">leaf</option>
                     </select>
                 </div>
-
-                <%--<div class="form-group">--%>
-                    <%--<select class="selectpicker form-control" name="type_ssi" id="type_ssi">--%>
-                        <%--<option value="">Select a type</option>--%>
-                        <%--<option value="trunk">trunk</option>--%>
-                    <%--</select>--%>
-                <%--</div>--%>
 
                 <div class="form-group">
                     <select class="selectpicker form-control" name="genre_ssi" id="genre_ssi">
@@ -135,7 +125,7 @@
 
 <script>
     var xhr;
-    function getData(currentPage) {
+    function getData() {
         //Display the url
         addAnd = false;
         var queryParameters = [];
@@ -143,9 +133,6 @@
         if ($('#query').val() != '') {
             queryParameters.push($('#query').val());
         }
-//        if ($('#part_of_ssim').val() != '') {
-//            queryParameters.push("part_of_ssim:" + $('#part_of_ssim').val());
-//        }
 
         if ($('#cat_ssi').val() != '') {
             if ($('#cat_ssi').val() == 'leaf') {
@@ -154,16 +141,13 @@
                 queryParameters.push("cat_ssi:" + $('#cat_ssi').val());
             }
         }
-//        if ($('#type_ssi').val() != '') {
-//            queryParameters.push("type_ssi:" + $('#type_ssi').val());
-//        }
+
         if ($('#genre_ssi').val() != '') {
             queryParameters.push("genre_ssi:" + $('#genre_ssi').val());
         }
         if ($('#Authors').val() != '') {
             queryParameters.push("author_name_tesim:" + $('#Authors').val());
         }
-
 
         url = url + queryParameters.join(' and ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
@@ -179,10 +163,10 @@
             success: function (data, textStatus, response) {
                 $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
                 var html = '';
-
+                console.log(data);
                 $.each(data.response.docs, function (i, row) {
                     //debugger;
-                    url = "http://adl.kb.dk/solr_documents/";
+                    url = "http://adl.dk/solr_documents/";
                     if(row.type_ssi == 'leaf' && row.part_of_ssim){url += row.part_of_ssim[0] + '#' + row.page_id_ssi; } else { if(row.type_ssi == 'leaf'){url="";}else{url += row.id;}}
                     if (url != ""){html += '<a href="' + url + '" target="_blank">';}
                     html += '<div class="document">' ;
@@ -223,12 +207,11 @@
         }
         return str.join(' ');
     }
-    //titleCase("I'm a little tea pot");
 
     $(document).ready(function () {
         getAuthors();
         $("#form").submit(function (event) {
-            getData(1);
+            getData();
             event.preventDefault();
         });
         // initialise the copy to clipboard
