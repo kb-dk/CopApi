@@ -129,7 +129,7 @@
         //Display the url
         addAnd = false;
         var queryParameters = [];
-        var url = "/rest/api/adl?q=";
+        var url = "rest/api/adl?q=";
         if ($('#query').val() != '') {
             queryParameters.push($('#query').val());
         }
@@ -151,9 +151,9 @@
 
         url = url + queryParameters.join(' and ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
-        $("#json").val(url + "&wt=json&indent=on");
-        $("#xml").val(url + "&wt=xml&indent=on");
-        $("#csv").val(url + "&wt=csv&indent=on");
+        $("#json").val("http://labs.kb.dk/" + url + "&wt=json&indent=on");
+        $("#xml").val("http://labs.kb.dk/" + url + "&wt=xml&indent=on");
+        $("#csv").val("http://labs.kb.dk/" + url + "&wt=csv&indent=on");
 
         //Get data
         xhr = $.ajax({
@@ -189,7 +189,7 @@
     function getAuthors() {
         $.ajax({
             dataType: "json",
-            url: "/rest/api/adl?q=cat_ssi:author and type_ssi:work&sort=sort_title_ssi asc&wt=json&rows=75",
+            url: "rest/api/adl?q=cat_ssi%3Aauthor+AND+type_ssi%3Awork&wt=json&start=0&rows=75&defType=edismax",
             success: function (data) {
                 var html = ' <option value="">Select an author</option>';
                 $.each(data.response.docs, function (i, row) {

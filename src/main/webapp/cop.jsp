@@ -115,7 +115,7 @@
             + "&page=" + currentPage;
 
         var url2 = "http://www.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
-        $("#json").val("http://labs.kb.dk:8080/copapi/" + url);
+        $("#json").val("http://labs.kb.dk/copapi/" + url);
 
         $("#rss").val(url2 + "&format=rss");
         $("#mods").val(url2 + "&format=mods");
