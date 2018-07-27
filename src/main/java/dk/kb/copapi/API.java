@@ -36,7 +36,7 @@ public class API {
     private String dsflURL = "http://www.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
     private String contentURL = "http://www.kb.dk/cop/content";
     private String navigationURL = "http://www.kb.dk/cop/navigation";
-    private String adlURL = "http://index.kb.dk/solr/adl-core/select/";
+    private String adlURL = "http://public-index.kb.dk/solr/text-retriever-core/select/";
 
     @GET
     @ApiOperation(value = "Get the list of editions and retrieve the identifier of the edition, it is needed for any other call ",
