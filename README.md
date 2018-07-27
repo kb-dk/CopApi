@@ -14,3 +14,5 @@ A swagger documentation has been added.
   * Install tomcat
   * Install JDK
   * Import the project as a maven project
+  
+  
