@@ -203,13 +203,18 @@ public class API {
                               "<br/>To what characters in the plays by Holberg talks about Mester Erich: q=genre_ssi:play and text_tesim:mester erich and author_name_tesim:holberg", name = "q", required = false) @QueryParam("q") String q,
             @ApiParam(value = "Start record", name = "start", required = false) @QueryParam("start") String start,
             @ApiParam(value = "Number of records to retrieve", name = "rows", required = false) @QueryParam("rows") String rows,
+            @ApiParam(value = "Facet needed to retrieve sub collection", name = "facet", required = false) @QueryParam("facetfield") String facetfield,
+            @ApiParam(value = "Facet fields needed to retrieve sub collection", name = "facet", required = false) @QueryParam("facet") String facet,
             @ApiParam(value = "defType can be 'dismax' or 'edismax' and is the query parser.", name = "defType", required = false) @QueryParam("defType") String defType,
             @ApiParam(value = "indent can be 'on' or 'off' and is the indentation of the result", name = "indent", required = false) @QueryParam("indent") String indent,
             @ApiParam(value = "Sort can be empty string or 'position_isi'. position_isi is the the position of the current node along the sibling axis of the document. Sorting with respect to this field will guarantee that the result is presented in document order.", name = "sort", required = false) @QueryParam("sort") String sort)
             throws Exception {
 
         URLReader reader = new URLReader();
+
         String url = textURL + "?q=" + URLEncoder.encode(q) + "&wt=json";
+
+        System.out.println(url);
 
         if (start != null) {
             url += "&start=" + start;
@@ -231,10 +236,22 @@ public class API {
             url += "&sort=" + URLEncoder.encode(sort, "UTF-8");
         }
 
+        if (facet != null) {
+            url += "&facet=" + facet;
+        }
+
+        if (facetfield != null) {
+            url += "&facet.field=" + facetfield;
+        }
+
+        System.out.println(url);
+
         InputStream is = new URL(url).openStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+
             String jsonText = readAll(rd);
+
             return Response.status(200).entity(jsonText).build();
         } finally {
             is.close();

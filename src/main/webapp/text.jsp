@@ -131,6 +131,8 @@
 
 <script>
     var xhr;
+    var testserver = "http://distest-03.kb.dk:8080/";
+    var opserver = "http://api.kb.dk/";
     function getData() {
         //Display the url
         addAnd = false;
@@ -160,9 +162,9 @@
         }
         url = url + queryParameters.join(' and ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
-        $("#json").val("http://labs.kb.dk/" + url + "&wt=json&indent=on");
-        $("#xml").val("http://labs.kb.dk/" + url + "&wt=xml&indent=on");
-        $("#csv").val("http://labs.kb.dk/" + url + "&wt=csv&indent=on");
+        $("#json").val(testserver + url + "&wt=json&indent=on");
+        $("#xml").val(testserver + url + "&wt=xml&indent=on");
+        $("#csv").val(testserver + url + "&wt=csv&indent=on");
 
         //Get data
         xhr = $.ajax({
@@ -197,15 +199,15 @@
     function getSubcollections() {
         $.ajax({
             dataType: "json",
-            url: "rest/api/text?q=&rows=0&facet=on&facet.field=subcollection_ssi",
+            url: "rest/api/text?q=&rows=0&facet=on&facetfield=subcollection_ssi",
             success: function (data) {
                 var html = ' <option value="">Select a sub collection</option>';
-                console.log(data);
 
-                $.each(data.facet_counts.subcollection_ssi, function (i, row) {
-                   // console.log(row);
 
-                    html += ' <option value="' + row['subcollection_ssi'] + '">' + titleCase(row['subcollection_ssi']) + '</option>';
+                $.each(data.facet_counts.facet_fields.subcollection_ssi, function (i, row) {
+                   if (i % 2 == 0){
+                       html += ' <option value="' + row + '">' + titleCase(row) + '</option>';
+                   }
                 });
 
                 $('#Sub_collections').html(html);
