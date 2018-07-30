@@ -36,7 +36,7 @@ public class API {
     private String dsflURL = "http://www.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
     private String contentURL = "http://www.kb.dk/cop/content";
     private String navigationURL = "http://www.kb.dk/cop/navigation";
-    private String adlURL = "http://public-index.kb.dk/solr/text-retriever-core/select/";
+    private String textURL = "http://index-test.kb.dk/solr/text-retriever-core/select/";
 
     @GET
     @ApiOperation(value = "Get the list of editions and retrieve the identifier of the edition, it is needed for any other call ",
@@ -183,11 +183,11 @@ public class API {
     }
 
     @GET
-    @ApiOperation(value = "Get the content of adl core from solr ",
+    @ApiOperation(value = "Get the content of text core from solr ",
             response = API.class)
-    @Path("adl/")
+    @Path("text/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getADLContent(
+    public Response getTextContent(
             @ApiParam(value = "Query comprised of <b>id</b>, <b>cat_ssi</b>, <b>type_ssi</b>, <b>genre_ssi</b>, <b>work_title_tesim</b>, <b>volume_title_tesim</b>, <b>author_name_tesim</b>, <b>text_tesim</b> and more which are separeted with 'and'."+
                               "<br/> <b>id</b> is the ID of the record. It is the TEI file base name, or, unless the record isn't referring to a volume, constructed as a string concatenation of that basename with the sequence of xml:ids identifying the uniq xpath to the content indexed."+
                               "<br/> <b>cat_ssi</b> can be an empty string or 'work' and is the category of a text. Use when limiting searches to works, omit otherwise."+
@@ -197,8 +197,8 @@ public class API {
                               "<br/> <b>Examples:</b>"+
                               "<br/>To find all works: q=cat_ssi:work"+
                               "<br/>To find all works by 'Gustaf Munch-Petersen': q=author_name_tesim:munch and cat_ssi:work"+
-                              "<br/>To find all texts in dialogs (<sp> elements) in ADL, written by someone called 'Jeppe': q=genre_ssi:play and author_name_tesim:jeppe"+
-                              "<br/>To find all texts in dialogs (<sp> elements) in ADL, spoken by a character named 'Jeppe': q=genre_ssi:play and speaker_tesim:jeppe"+
+                              "<br/>To find all texts in dialogs (<sp> elements) in Text, written by someone called 'Jeppe': q=genre_ssi:play and author_name_tesim:jeppe"+
+                              "<br/>To find all texts in dialogs (<sp> elements) in Text, spoken by a character named 'Jeppe': q=genre_ssi:play and speaker_tesim:jeppe"+
                               "<br/>To find all strophes of poetry containing the words hjerte and smerte (heart and agony): q=type_ssi:leaf and genre_ssi:poetry and author_name_tesim:grundtvig and text_tesim:hjerte and text_tesim:smerte"+
                               "<br/>To what characters in the plays by Holberg talks about Mester Erich: q=genre_ssi:play and text_tesim:mester erich and author_name_tesim:holberg", name = "q", required = false) @QueryParam("q") String q,
             @ApiParam(value = "Start record", name = "start", required = false) @QueryParam("start") String start,
@@ -209,7 +209,7 @@ public class API {
             throws Exception {
 
         URLReader reader = new URLReader();
-        String url = adlURL + "?q=" + URLEncoder.encode(q) + "&wt=json";
+        String url = textURL + "?q=" + URLEncoder.encode(q) + "&wt=json";
 
         if (start != null) {
             url += "&start=" + start;
