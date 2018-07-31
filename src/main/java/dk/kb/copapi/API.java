@@ -23,6 +23,8 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //http://localhost:8080/swagger/
 
@@ -31,12 +33,12 @@ import java.util.List;
 public class API {
 
 
-
     private String copURL = "http://www.kb.dk/cop/syndication";
     private String dsflURL = "http://www.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
     private String contentURL = "http://www.kb.dk/cop/content";
     private String navigationURL = "http://www.kb.dk/cop/navigation";
     private String textURL = "http://index-test.kb.dk/solr/text-retriever-core/select/";
+    private static final Logger LOGGER = Logger.getLogger(API.class.getName());
 
     @GET
     @ApiOperation(value = "Get the list of editions and retrieve the identifier of the edition, it is needed for any other call ",
@@ -75,8 +77,8 @@ public class API {
                     editions.add(edition);
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, ex.toString(), ex);
         }
 
         return editions;
@@ -188,19 +190,19 @@ public class API {
     @Path("text/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTextContent(
-            @ApiParam(value = "Query comprised of <b>id</b>, <b>cat_ssi</b>, <b>type_ssi</b>, <b>genre_ssi</b>, <b>work_title_tesim</b>, <b>volume_title_tesim</b>, <b>author_name_tesim</b>, <b>text_tesim</b> and more which are separeted with 'and'."+
-                              "<br/> <b>id</b> is the ID of the record. It is the TEI file base name, or, unless the record isn't referring to a volume, constructed as a string concatenation of that basename with the sequence of xml:ids identifying the uniq xpath to the content indexed."+
-                              "<br/> <b>cat_ssi</b> can be an empty string or 'work' and is the category of a text. Use when limiting searches to works, omit otherwise."+
-                              "<br/> <b>type_ssi</b> can be 'trunk' or 'leaf' and is Node type in document. A trunk node can be a whole work, a chapter etc, whereas a leaf could a paragraph of prose, a stanza (or strophe) of poetry or a speak in a dialog in a scenic work. "+
-                              "<br/> <b>genre_ssi</b> can be 'prose', 'poetry' or 'play' and is genre of a leaf node. Note that this is not the genre of a work, but the structure of the paragraph level markup."+
-                              "<br/> <b>work_title_tesim</b>, <b>volume_title_tesim</b>, <b>author_name_tesim</b> and <b>text_tesim</b> are metadata fields. There are more of them, but they should be self explanatory."+
-                              "<br/> <b>Examples:</b>"+
-                              "<br/>To find all works: q=cat_ssi:work"+
-                              "<br/>To find all works by 'Gustaf Munch-Petersen': q=author_name_tesim:munch and cat_ssi:work"+
-                              "<br/>To find all texts in dialogs (<sp> elements) in Text, written by someone called 'Jeppe': q=genre_ssi:play and author_name_tesim:jeppe"+
-                              "<br/>To find all texts in dialogs (<sp> elements) in Text, spoken by a character named 'Jeppe': q=genre_ssi:play and speaker_tesim:jeppe"+
-                              "<br/>To find all strophes of poetry containing the words hjerte and smerte (heart and agony): q=type_ssi:leaf and genre_ssi:poetry and author_name_tesim:grundtvig and text_tesim:hjerte and text_tesim:smerte"+
-                              "<br/>To what characters in the plays by Holberg talks about Mester Erich: q=genre_ssi:play and text_tesim:mester erich and author_name_tesim:holberg", name = "q", required = false) @QueryParam("q") String q,
+            @ApiParam(value = "Query comprised of <b>id</b>, <b>cat_ssi</b>, <b>type_ssi</b>, <b>genre_ssi</b>, <b>work_title_tesim</b>, <b>volume_title_tesim</b>, <b>author_name_tesim</b>, <b>text_tesim</b> and more which are separeted with 'and'." +
+                    "<br/> <b>id</b> is the ID of the record. It is the TEI file base name, or, unless the record isn't referring to a volume, constructed as a string concatenation of that basename with the sequence of xml:ids identifying the uniq xpath to the content indexed." +
+                    "<br/> <b>cat_ssi</b> can be an empty string or 'work' and is the category of a text. Use when limiting searches to works, omit otherwise." +
+                    "<br/> <b>type_ssi</b> can be 'trunk' or 'leaf' and is Node type in document. A trunk node can be a whole work, a chapter etc, whereas a leaf could a paragraph of prose, a stanza (or strophe) of poetry or a speak in a dialog in a scenic work. " +
+                    "<br/> <b>genre_ssi</b> can be 'prose', 'poetry' or 'play' and is genre of a leaf node. Note that this is not the genre of a work, but the structure of the paragraph level markup." +
+                    "<br/> <b>work_title_tesim</b>, <b>volume_title_tesim</b>, <b>author_name_tesim</b> and <b>text_tesim</b> are metadata fields. There are more of them, but they should be self explanatory." +
+                    "<br/> <b>Examples:</b>" +
+                    "<br/>To find all works: q=cat_ssi:work" +
+                    "<br/>To find all works by 'Gustaf Munch-Petersen': q=author_name_tesim:munch and cat_ssi:work" +
+                    "<br/>To find all texts in dialogs (<sp> elements) in Text, written by someone called 'Jeppe': q=genre_ssi:play and author_name_tesim:jeppe" +
+                    "<br/>To find all texts in dialogs (<sp> elements) in Text, spoken by a character named 'Jeppe': q=genre_ssi:play and speaker_tesim:jeppe" +
+                    "<br/>To find all strophes of poetry containing the words hjerte and smerte (heart and agony): q=type_ssi:leaf and genre_ssi:poetry and author_name_tesim:grundtvig and text_tesim:hjerte and text_tesim:smerte" +
+                    "<br/>To what characters in the plays by Holberg talks about Mester Erich: q=genre_ssi:play and text_tesim:mester erich and author_name_tesim:holberg", name = "q", required = false) @QueryParam("q") String q,
             @ApiParam(value = "Start record", name = "start", required = false) @QueryParam("start") String start,
             @ApiParam(value = "Number of records to retrieve", name = "rows", required = false) @QueryParam("rows") String rows,
             @ApiParam(value = "Facet needed to retrieve sub collection", name = "facet", required = false) @QueryParam("facetfield") String facetfield,
@@ -212,9 +214,8 @@ public class API {
 
         URLReader reader = new URLReader();
 
-        String url = textURL + "?q=" + URLEncoder.encode(q) + "&wt=json";
+        String url = textURL + "?q=" + URLEncoder.encode(q, "UTF-8") + "&wt=json";
 
-        System.out.println(url);
 
         if (start != null) {
             url += "&start=" + start;
@@ -244,8 +245,6 @@ public class API {
             url += "&facet.field=" + facetfield;
         }
 
-        System.out.println(url);
-
         InputStream is = new URL(url).openStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
@@ -253,10 +252,16 @@ public class API {
             String jsonText = readAll(rd);
 
             return Response.status(200).entity(jsonText).build();
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, ex.toString(), ex);
+
         } finally {
             is.close();
         }
+
+        return null;
     }
+
 
     @GET
     @ApiOperation(value = "The subject hierarchy needed for filtering and building the browsing service",

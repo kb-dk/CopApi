@@ -104,7 +104,7 @@
 
 <script>
     var pagination;
-    var testserver = "http://distest-03.kb.dk:8080/";
+    var testserver = "http://distest-03.kb.dk:8080/copapi/";
     var opserver = "http://api.kb.dk/";
     function getData(currentPage) {
         //Display the url

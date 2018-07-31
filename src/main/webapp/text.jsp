@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+
+
     <!-- BOOTSTRAP -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -123,6 +125,7 @@
 
             <br/>
             <div id="content"></div>
+            <div id="spinner"></div>
 
         </div>
     </div>
@@ -131,8 +134,10 @@
 
 <script>
     var xhr;
-    var testserver = "http://distest-03.kb.dk:8080/";
+    var testserver = "http://distest-03.kb.dk:8080/copapi/";
     var opserver = "http://api.kb.dk/";
+
+
     function getData() {
         //Display the url
         addAnd = false;
@@ -154,7 +159,6 @@
             queryParameters.push("genre_ssi:" + $('#genre_ssi').val());
         }
         if ($('#Sub_collections').val() != '') {
-            console.log($('#Sub_collections').val());
             queryParameters.push("subcollection_ssi:" + $('#Sub_collections').val());
         }
         if ($('#Authors').val() != '') {
@@ -202,16 +206,12 @@
             url: "rest/api/text?q=&rows=0&facet=on&facetfield=subcollection_ssi",
             success: function (data) {
                 var html = ' <option value="">Select a sub collection</option>';
-
-
                 $.each(data.facet_counts.facet_fields.subcollection_ssi, function (i, row) {
                    if (i % 2 == 0){
                        html += ' <option value="' + row + '">' + titleCase(row) + '</option>';
                    }
                 });
-
                 $('#Sub_collections').html(html);
-
             }
         });
     }
@@ -240,8 +240,6 @@
     $(document).ready(function () {
         getAuthors();
         getSubcollections();
-        console.log($('#Authors').html());
-        console.log($('#Sub_collections').html());
 
         $("#form").submit(function (event) {
             getData();
