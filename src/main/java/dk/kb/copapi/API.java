@@ -94,8 +94,8 @@ public class API {
             @ApiParam(value = "Search query", name = "query") @QueryParam("query") String query,
             @ApiParam(value = "Pagination-Page", name = "page") @QueryParam("page") String page,
             @ApiParam(value = "Pagination-Limit", name = "itemsPerPage") @QueryParam("itemsPerPage") String itemsPerPage,
-            @ApiParam(value = "default is 1920-01-01, Do not return pictures before this date YYYY-MM-DD", name = "before") @QueryParam("before") String notBefore,
-            @ApiParam(value = "default is 1970-12-31, Do not return pictures before this date YYYY-MM-DD", name = "after") @QueryParam("after") String notAfter)
+            @ApiParam(value = "default is 1920-01-01, Do not return pictures before this date YYYY-MM-DD", name = "not before") @QueryParam("before") String notBefore,
+            @ApiParam(value = "default is 1970-12-31, Do not return pictures before this date YYYY-MM-DD", name = "not after") @QueryParam("after") String notAfter)
             throws Exception {
 
         List<Edition> editions = new ArrayList<Edition>();
