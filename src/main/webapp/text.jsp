@@ -164,7 +164,7 @@
         if ($('#Authors').val() != '') {
             queryParameters.push("author_name_tesim:" + $('#Authors').val());
         }
-        url = url + queryParameters.join(' and ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
+        url = url + queryParameters.join(' AND ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
         $("#json").val(testserver + url + "&wt=json&indent=on");
         $("#xml").val(testserver + url + "&wt=xml&indent=on");
@@ -178,21 +178,25 @@
             success: function (data, textStatus, response) {
                 $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
                 var html = '';
-                console.log(data);
                 $.each(data.response.docs, function (i, row) {
-                    //debugger;
+
                     url = "http://text-test.kb.dk/text/";
                     if(row.type_ssi == 'leaf' && row.part_of_ssim){url += row.part_of_ssim[0] + '#' + row.page_id_ssi; } else { if(row.type_ssi == 'leaf'){url="";}else{url += row.id;}}
                     if (url != ""){html += '<a href="' + url + '" target="_blank">';}
                     html += '<div class="document">' ;
                     if (row.work_title_tesim != null) {html += "<div><b>Title: </b>" + row.work_title_tesim.join(" ")+"</div>";}
-                    if (row.author_nasim != null) {html += "<div><b>Volume title: </b>" + row.volume_title_tesim.join(" ")+"</div>";}
-                    if (row.volume_title_tesim != null) {html += "<div><b>Author: </b>" + row.author_nasim.join(" ")+"</div>";}
+                    if (row.volume_title_tesim != null) {html += "<div><b>Volume title: </b>" + row.volume_title_tesim.join(" ")+"</div>";}
+                    if (row.author_nasim != null) {html += "<div><b>Author: </b>" + row.author_nasim.join(" ")+"</div>";}
                     if (row.text_tesim != null) {html += "<div class='text'><b>Text: </b>" + row.text_tesim.join(" ")+"</div>";}
                     html += '</div>';
                     if (url != ""){html += '</a>';}
 
                 });
+
+                if (html == '') {
+                    html = '<div class="alert alert-info">No data</div>';
+                }
+
                 $('#content').html(html);
             },
             error: function () {
@@ -237,12 +241,19 @@
         return str.join(' ');
     }
 
+    function reset(){
+
+        $('#content').html('');
+    }
+
     $(document).ready(function () {
         getAuthors();
         getSubcollections();
 
         $("#form").submit(function (event) {
+            reset();
             getData();
+
             event.preventDefault();
         });
         // initialise the copy to clipboard
