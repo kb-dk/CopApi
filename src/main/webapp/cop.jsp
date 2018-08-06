@@ -104,7 +104,8 @@
 
 <script>
     var pagination;
-    var xhr;
+    var testserver = "http://distest-03.kb.dk:8080/copapi/";
+    var opserver = "http://api.kb.dk/";
     function getData(currentPage) {
         //Display the url
         var url = "rest/api/cop?itemsPerPage=30"
@@ -115,17 +116,13 @@
             + "&page=" + currentPage;
 
         var url2 = "http://www.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
-        $("#json").val("http://labs.kb.dk/copapi/" + url);
+        $("#json").val(testserver + url);
 
         $("#rss").val(url2 + "&format=rss");
         $("#mods").val(url2 + "&format=mods");
         $("#kml").val(url2 + "&format=kml");
-        //Abort on new request
-        if (xhr != null) {
-            xhr.abort();
-        }
-        //Get data
-        xhr = $.ajax({
+
+        $.ajax({
             dataType: "json",
             url: url,
             contentType: 'application/json; charset=utf-8',

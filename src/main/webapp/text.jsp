@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+
+
     <!-- BOOTSTRAP -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -32,9 +34,10 @@
 </head>
 
 <body>
-    <jsp:include page="header.jsp">
-        <jsp:param name="active" value="text"/>
-    </jsp:include>
+
+<jsp:include page="header.jsp">
+    <jsp:param name="active" value="text"/>
+</jsp:include>
 
 <div class="container">
     <div class="starter-template">
@@ -44,6 +47,12 @@
                 <div class="form-group big_search_box">
                     <input type="text" placeholder="Search" class="form-control" id="query" name="q">
                 </div>
+
+                <div class="form-group">
+                    <select class="selectpicker form-control" name="subcollection_ssi" id="Sub_collections">
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <select class="selectpicker form-control" name="author_nasim" id="Authors">
                     </select>
@@ -116,6 +125,7 @@
 
             <br/>
             <div id="content"></div>
+            <div id="spinner"></div>
 
         </div>
     </div>
@@ -124,6 +134,10 @@
 
 <script>
     var xhr;
+    var testserver = "http://distest-03.kb.dk:8080/copapi/";
+    var opserver = "http://api.kb.dk/";
+
+
     function getData() {
         //Display the url
         addAnd = false;
@@ -144,15 +158,17 @@
         if ($('#genre_ssi').val() != '') {
             queryParameters.push("genre_ssi:" + $('#genre_ssi').val());
         }
+        if ($('#Sub_collections').val() != '') {
+            queryParameters.push("subcollection_ssi:" + $('#Sub_collections').val());
+        }
         if ($('#Authors').val() != '') {
             queryParameters.push("author_name_tesim:" + $('#Authors').val());
         }
+        url = url + queryParameters.join(' AND ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
-        url = url + queryParameters.join(' and ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
-
-        $("#json").val("http://labs.kb.dk/" + url + "&wt=json&indent=on");
-        $("#xml").val("http://labs.kb.dk/" + url + "&wt=xml&indent=on");
-        $("#csv").val("http://labs.kb.dk/" + url + "&wt=csv&indent=on");
+        $("#json").val(testserver + url + "&wt=json&indent=on");
+        $("#xml").val(testserver + url + "&wt=xml&indent=on");
+        $("#csv").val(testserver + url + "&wt=csv&indent=on");
 
         //Get data
         xhr = $.ajax({
@@ -162,21 +178,25 @@
             success: function (data, textStatus, response) {
                 $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
                 var html = '';
-                console.log(data);
                 $.each(data.response.docs, function (i, row) {
-                    //debugger;
-                    url = "http://adl.dk/solr_documents/";
+
+                    url = "http://text-test.kb.dk/text/";
                     if(row.type_ssi == 'leaf' && row.part_of_ssim){url += row.part_of_ssim[0] + '#' + row.page_id_ssi; } else { if(row.type_ssi == 'leaf'){url="";}else{url += row.id;}}
                     if (url != ""){html += '<a href="' + url + '" target="_blank">';}
                     html += '<div class="document">' ;
                     if (row.work_title_tesim != null) {html += "<div><b>Title: </b>" + row.work_title_tesim.join(" ")+"</div>";}
-                    if (row.author_nasim != null) {html += "<div><b>Volume title: </b>" + row.volume_title_tesim.join(" ")+"</div>";}
-                    if (row.volume_title_tesim != null) {html += "<div><b>Author: </b>" + row.author_nasim.join(" ")+"</div>";}
+                    if (row.volume_title_tesim != null) {html += "<div><b>Volume title: </b>" + row.volume_title_tesim.join(" ")+"</div>";}
+                    if (row.author_nasim != null) {html += "<div><b>Author: </b>" + row.author_nasim.join(" ")+"</div>";}
                     if (row.text_tesim != null) {html += "<div class='text'><b>Text: </b>" + row.text_tesim.join(" ")+"</div>";}
                     html += '</div>';
                     if (url != ""){html += '</a>';}
 
                 });
+
+                if (html == '') {
+                    html = '<div class="alert alert-info">No data</div>';
+                }
+
                 $('#content').html(html);
             },
             error: function () {
@@ -184,7 +204,21 @@
             }
         });
     }
-
+    function getSubcollections() {
+        $.ajax({
+            dataType: "json",
+            url: "rest/api/text?q=&rows=0&facet=on&facetfield=subcollection_ssi",
+            success: function (data) {
+                var html = ' <option value="">Select a sub collection</option>';
+                $.each(data.facet_counts.facet_fields.subcollection_ssi, function (i, row) {
+                   if (i % 2 == 0){
+                       html += ' <option value="' + row + '">' + titleCase(row) + '</option>';
+                   }
+                });
+                $('#Sub_collections').html(html);
+            }
+        });
+    }
     function getAuthors() {
         $.ajax({
             dataType: "json",
@@ -193,8 +227,7 @@
                 var html = ' <option value="">Select an author</option>';
                 $.each(data.response.docs, function (i, row) {
 
-                    html += ' <option value="' + row['author_name_tesim'] + '">' + titleCase(row['author_name_ssi']) + '</option>';
-                    console.log(titleCase(row['sort_title_ssi']));
+                    html += ' <option value="' + row['work_title_tesim'] + '">' + titleCase(row['inverted_name_title_ssi']) + '</option>';
                 });
                 $('#Authors').html(html);
             }
@@ -208,10 +241,19 @@
         return str.join(' ');
     }
 
+    function reset(){
+
+        $('#content').html('');
+    }
+
     $(document).ready(function () {
         getAuthors();
+        getSubcollections();
+
         $("#form").submit(function (event) {
+            reset();
             getData();
+
             event.preventDefault();
         });
         // initialise the copy to clipboard
