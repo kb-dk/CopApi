@@ -17,7 +17,7 @@
                 <li <c:if test = "${param.active=='dsfl'}"> class="active" </c:if>><a href="dsfl">DSFL</a></li>
                 <li <c:if test = "${param.active=='cop'}"> class="active" </c:if>><a href="cop">COP</a></li>
                 <li <c:if test = "${param.active=='text'}"> class="active" </c:if>><a href="text">TEXT</a></li>
-                <li <c:if test = "${param.active=='documentation'}"> class="active" </c:if>><a href="swagger">Documentation</a></li>
+                <li <c:if test = "${param.active=='documentation'}"> class="active" </c:if>><a href="documentation">Documentation</a></li>
             </ul>
         </div>
     </div>
