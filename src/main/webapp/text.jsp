@@ -134,7 +134,7 @@
 
 <script>
     var xhr;
-    var testserver = "http://distest-03.kb.dk:8080/copapi/";
+    var testserver = "http://distest-03.kb.dk:8080/";
     var opserver = "http://api.kb.dk/";
 
 

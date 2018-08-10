@@ -14,9 +14,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li <c:if test = "${param.active=='dsfl'}"> class="active" </c:if>><a href="index.jsp">DSFL</a></li>
-                <li <c:if test = "${param.active=='cop'}"> class="active" </c:if>><a href="cop.jsp">COP</a></li>sdfdsfds
-                <li <c:if test = "${param.active=='text'}"> class="active" </c:if>><a href="text.jsp">TEXT</a></li>
+                <li <c:if test = "${param.active=='dsfl'}"> class="active" </c:if>><a href="dsfl">DSFL</a></li>
+                <li <c:if test = "${param.active=='cop'}"> class="active" </c:if>><a href="cop">COP</a></li>
+                <li <c:if test = "${param.active=='text'}"> class="active" </c:if>><a href="text">TEXT</a></li>
                 <li <c:if test = "${param.active=='documentation'}"> class="active" </c:if>><a href="swagger">Documentation</a></li>
             </ul>
         </div>
