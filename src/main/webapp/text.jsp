@@ -29,13 +29,13 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="css/kbdk-styles.css"/>
 
 </head>
 
-<body>
+<body class="theme-yellow" >
 
-<jsp:include page="header.jsp">
+<jsp:include page="design-components/organisms/header/index.jsp">
     <jsp:param name="active" value="text"/>
 </jsp:include>
 
