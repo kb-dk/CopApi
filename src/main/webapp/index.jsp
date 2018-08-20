@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: laap
-  Date: 03-05-2017
-  Time: 13:26
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+
+<html lang="da">
 <head>
     <title>KB API Demo</title>
     <link rel="shortcut icon"  href="favicon.ico" />
@@ -46,14 +40,22 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+
+    <%--<link type="text/css" rel="stylesheet" href="css/style.css"/>--%>
+    <link type="text/css" rel="stylesheet" href="css/kbdk-styles.css"/>
+    <link type="text/css" rel="stylesheet" href="css/custom.css"/>
 
 </head>
 
-<body>
+<body class="theme-yellow">
 
-<jsp:include page="header.jsp">
+<jsp:include page="design-components/organisms/header/index.jsp">
     <jsp:param name="active" value="dsfl"/>
+</jsp:include>
+
+<jsp:include page="design-components/atoms/divider/index.jsp">
+    <jsp:param name="type" value="top-left theme-color"/>
 </jsp:include>
 
 <div class="container">
@@ -62,31 +64,27 @@
         <div id="url">
             <div class="input-group">
                 <span class="input-group-addon input-group-addon-text">JSON</span>
-                <input id="json" class="form-control url" placeholder="Use the search bar to get URL">
-                <span class="btn input-group-addon" data-clipboard-target="#json">
-                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
-                        </span>
+                <jsp:include page="design-components/molecules/float-label-input/index.jsp">
+                    <jsp:param name="id" value="json"/>
+                </jsp:include>
             </div>
             <div class="input-group">
                 <span class="input-group-addon input-group-addon-text">RSS</span>
-                <input id="rss" class="form-control url" placeholder="Use the search bar to get URL">
-                <span class="btn input-group-addon" data-clipboard-target="#rss">
-                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
-                        </span>
+                <jsp:include page="design-components/molecules/float-label-input/index.jsp">
+                    <jsp:param name="id" value="rss"/>
+                </jsp:include>
             </div>
             <div class="input-group">
                 <span class="input-group-addon input-group-addon-text">KML</span>
-                <input id="kml" class="form-control url" placeholder="Use the search bar to get URL">
-                <span class="btn input-group-addon" data-clipboard-target="#kml">
-                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
-                        </span>
+                <jsp:include page="design-components/molecules/float-label-input/index.jsp">
+                    <jsp:param name="id" value="kml"/>
+                </jsp:include>
             </div>
             <div class="input-group">
                 <span class="input-group-addon input-group-addon-text">MODS</span>
-                <input id="mods" class="form-control url" placeholder="Use the search bar to get URL">
-                <span class="btn input-group-addon" data-clipboard-target="#mods">
-                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
-                        </span>
+                <jsp:include page="design-components/molecules/float-label-input/index.jsp">
+                    <jsp:param name="id" value="mods"/>
+                </jsp:include>
             </div>
 
         </div>
@@ -97,6 +95,7 @@
         <div id="map"></div>
     </div>
 </div>
+<jsp:include page="design-components/organisms/footer/index.jsp" />
 </body>
 
 <script>
@@ -163,5 +162,7 @@
         getData();
     });
 </script>
+<%-- KB.DK Design javascripts--%>
+<script src="js/scripts.js"></script>
 
 </html>
