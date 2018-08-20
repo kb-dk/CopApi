@@ -1,0 +1,10 @@
+.org-c3af7b08-07d8-4a3e-8b12-5b6de87acf0c .inner-content{
+    height : 98px;
+}
+
+#map {
+    height: 680px;
+}
+.icon-copy:before {
+    content: '\f237';
+}
