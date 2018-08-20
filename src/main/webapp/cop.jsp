@@ -52,41 +52,58 @@
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                 </div>
-                <div id="url">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-text">JSON</span>
-                        <input id="json" class="form-control url" placeholder="Use the search bar to get URL">
-                        <span class="btn input-group-addon" data-clipboard-target="#json">
-                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
-                        </span>
+                <div class="cell small-12">
+                    <div class="grid-x grid-margin-x">
+                        <div class=" cell small-1">
+                            <h3>JSON</h3>
+                        </div>
+                        <div class="cell small-11">
+                            <jsp:include page="design-components/molecules/float-label-input/index.jsp">
+                                <jsp:param name="id" value="json"/>
+                                <jsp:param name="placeholder" value="Use the search bar to get URL"/>
+                            </jsp:include>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-text">RSS</span>
-                        <input id="rss" class="form-control url" placeholder="Use the search bar to get URL">
-                        <span class="btn input-group-addon" data-clipboard-target="#rss">
-                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
-                        </span>
+                    <div class="grid-x grid-margin-x">
+                        <div class=" cell small-1">
+                            <h3>RSS</h3>
+                        </div>
+                        <div class="cell small-11">
+                            <jsp:include page="design-components/molecules/float-label-input/index.jsp">
+                                <jsp:param name="id" value="rss"/>
+                                <jsp:param name="placeholder" value="Use the search bar to get URL"/>
+                            </jsp:include>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-text">KML</span>
-                        <input id="kml" class="form-control url" placeholder="Use the search bar to get URL">
-                        <span class="btn input-group-addon" data-clipboard-target="#kml">
-                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
-                        </span>
+                    <div class="grid-x grid-margin-x">
+                        <div class=" cell small-1">
+                            <h3>KML</h3>
+                        </div>
+                        <div class="cell small-11">
+                            <jsp:include page="design-components/molecules/float-label-input/index.jsp">
+                                <jsp:param name="id" value="kml"/>
+                                <jsp:param name="placeholder" value="Use the search bar to get URL"/>
+                            </jsp:include>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-text">MODS</span>
-                        <input id="mods" class="form-control url" placeholder="Use the search bar to get URL">
-                        <span class="btn input-group-addon" data-clipboard-target="#mods">
-                           <img class="clippy" src="images/clippy.svg" alt="Copy to clipboard">
-                        </span>
+                    <div class="grid-x grid-margin-x">
+                        <div class=" cell small-1">
+                            <h3>MODS</h3>
+                        </div>
+                        <div class="cell small-11">
+                            <jsp:include page="design-components/molecules/float-label-input/index.jsp">
+                                <jsp:param name="id" value="mods"/>
+                                <jsp:param name="placeholder" value="Use the search bar to get URL"/>
+                            </jsp:include>
+                        </div>
                     </div>
-
                 </div>
-                <br>
-                <div id="total" class="total"></div>
-                <div class="pagination"></div>
-                <div id="content"></div>
+                <div class="cell small-12">
+                    <br>
+                    <div id="total" class="total"></div>
+                    <div class="pagination"></div>
+                    <div id="content"></div>
+                </div>
             </div>
         </div>
         </div>
@@ -224,6 +241,5 @@
             });
         });
     </script>
-    <%-- KB.DK Design javascripts--%>
-    <script src="js/scripts.js"></script>
+
 </html>
