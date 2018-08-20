@@ -15,7 +15,6 @@
                         <li><a href="http://www.kb.dk/danmarksetfraluften">Danmark set fra luften</a></li>
                         <li><a href="http://www.kb.dk/editions/any/2009/jul/editions/da">Digitale samlinger</a></li>
                         <li><a href="http://text-test.kb.dk/">Tekstportal</a></li>
-                        <li><a href="http://kb.dk/">Om det kgl. bibliotek</a></li>
                     </ul>
                 </nav>
                 <nav class="main-nav">

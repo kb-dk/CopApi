@@ -5,31 +5,13 @@
 
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-
-
-    <!-- BOOTSTRAP -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
 
     <!-- CLIPBOARD -->
     <script src="js/clipboard.min.js"></script>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-          crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-
+    <%--<link type="text/css" rel="stylesheet" href="css/style.css"/>--%>
     <link type="text/css" rel="stylesheet" href="css/kbdk-styles.css"/>
+    <link type="text/css" rel="stylesheet" href="css/custom.css"/>
 
 </head>
 
@@ -39,9 +21,10 @@
     <jsp:param name="active" value="text"/>
 </jsp:include>
 
-<div class="container">
-    <div class="starter-template">
-        <div class="row">
+
+
+
+
             <form id="form" class="form-inline" action="http://index-test.kb.dk/solr/text-retriever-core/select/?q" target="_blank">
 
                 <div class="form-group big_search_box">
@@ -99,7 +82,7 @@
 
                 <button type="submit" class="space_on_top btn btn-default">Submit</button>
             </form>
-        </div>
+
         <div id="url">
             <div class="input-group">
                 <span class="input-group-addon input-group-addon-text">JSON</span>
@@ -128,8 +111,7 @@
             <div id="spinner"></div>
 
         </div>
-    </div>
-</div>
+
 </body>
 
 <script>
