@@ -9,5 +9,8 @@
         <module name="copapi" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="copapi" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
