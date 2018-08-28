@@ -12,8 +12,8 @@ public class UncaughtException extends Throwable implements ExceptionMapper<Thro
 {
     private static final long serialVersionUID = 1L;
 
-    @Override
+
     public Response toResponse(Throwable exception) {
-        return Response.status(500).entity("Sorry, an error has occurred. Pleade try again later").type("text/plain").build();
+        return Response.status(500).entity("Sorry, an error has occurred. are you sure that you have the correct parameters?").type("text/plain").build();
     }
 }

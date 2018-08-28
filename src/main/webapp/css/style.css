@@ -7,6 +7,40 @@ body {
     border: 1px solid #ffc1a7;
     border-radius: 4px;
 }
+.form-group, .space_on_top{
+    margin-top: 10px;
+}
+.document {
+    border: thin solid #f2eee2;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 10px;
+    margin-top: 0;
+    background-color: rgba(242,238,226,0.5);
+    text-align: left;
+}
+.big_search_box{
+    width:100%;
+}
+.big_search_box .form-control{
+    width: 50%;
+}
+.text{
+    max-height: 100px;
+    overflow: hidden;
+}
+a, a:hover, a:focus{
+    color: #333;
+}
+a:hover, a:focus{
+    text-decoration: none;
+}
+a:hover>div{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.09);
+}
+.small{
+    width: 75px !important;
+}
 
 .light-theme .current {
     background: #ffc1a7;
