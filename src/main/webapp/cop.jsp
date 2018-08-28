@@ -102,7 +102,8 @@
                     <br>
                     <div id="total" class="total"></div>
                     <div class="pagination"></div>
-                    <div id="content"></div>
+                    <div id="content"><jsp:include page="design-components/organisms/content-spot-banner/index.jsp">
+                        <jsp:param name="id" value="cop-gallerie"/> </jsp:include></div>
                 </div>
             </div>
         </div>
@@ -137,7 +138,27 @@
                 success: function (data, textStatus, response) {
                     $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
                     var html = '';
+
                     $.each(data, function (i, row) {
+
+                        html += '<div class="small-12 medium-4 cell">' +
+                            '<jsp:include page="design-components/organisms/content-spot/index.jsp">' +
+                                <jsp:param name="url" value="' + row['imageURI'] + ' + "/>
+                            </jsp:include>
+                            </div>
+                            <div class="small-12 medium-4 cell">
+                            <jsp:include page="../content-spot/index.jsp">
+                            <jsp:param name="type" value="podcast"/>
+                            </jsp:include>
+                            </div>
+                            <div class="small-12 medium-4 cell">
+                            <jsp:include page="../content-spot/index.jsp">
+                            <jsp:param name="type" value="podcast"/>
+                            </jsp:include>
+                            </div>
+
+
+
                         html += ' <div class="responsive"><div class="gallery">' +
                             '<a target="_blank" href="' + row['link'] + '/da">' +
                             '<img src="' + row['imageURI'] + '"></a> ' +
@@ -145,7 +166,10 @@
                             '</div>' +
                             '</div>';
                     });
-                    $('#content').html(html);
+
+
+                    $('#content').html();
+                    $('#test').html();
                     //initialise the pagination
                     if (pagination == null) {
                         initializePagination(response.getResponseHeader('Pagination-Count'));
