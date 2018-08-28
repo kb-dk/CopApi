@@ -36,7 +36,7 @@
     <body class="theme-yellow">
 
         <jsp:include page="design-components/organisms/header/index.jsp">
-            <jsp:param name="active" value="dsfl"/>
+            <jsp:param name="active" value="cop"/>
         </jsp:include>
 
         <jsp:include page="design-components/atoms/divider/index.jsp">
