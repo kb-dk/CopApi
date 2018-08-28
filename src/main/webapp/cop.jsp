@@ -6,16 +6,31 @@
         <!-- JQUERY -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <!-- PAGINATION -->
-        <script type="text/javascript" src="js/jquery.simplePagination.js"></script>
-        <link type="text/css" rel="stylesheet" href="css/simplePagination.css"/>
+
+
+
+        <!-- BOOTSTRAP -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+
+
+
 
         <!-- CLIPBOARD -->
         <script src="js/clipboard.min.js"></script>
+        <!-- CLIPBOARD -->
+        <script src="js/clipboard.min.js"></script>
+
         <%--<link type="text/css" rel="stylesheet" href="css/style.css"/>--%>
         <link type="text/css" rel="stylesheet" href="css/kbdk-styles.css"/>
         <link type="text/css" rel="stylesheet" href="css/custom.css"/>
-
     </head>
 
     <body class="theme-yellow">
@@ -32,83 +47,77 @@
         <div class="inner-content grid-container">
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
-                    <h1>Digitale samlingerne</h1>
-                    <form id="form" class="form-inline">
-                        <div class="form-group">
-                            <select class="selectpicker form-control" name="editions" id="editions">
-                            </select>
-                        </div>
-                        <div class="form-group">
+                    <h1>Digital samlingerne</h1>
+                    <div class="starter-template">
+                        <div class="row">
+                            <form id="form" class="form-inline">
+                                <div class="form-group">
+                                    <select class="selectpicker form-control" name="editions" id="editions">
+                                    </select>
+                                </div>
+                                <div class="form-group">
 
-                            <input type="text" placeholder="Search (comma separated)" class="form-control" id="query">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Not before YYYY-MM-DD" class="form-control" id="notBefore">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Not after YYYY-MM-DD" class="form-control" id="notAfter">
-                        </div>
+                                    <input type="text" placeholder="Search (comma separated)" class="form-control"
+                                           id="query" >
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Not before YYYY-MM-DD" class="form-control"
+                                           id="notBefore" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Not after YYYY-MM-DD" class="form-control"
+                                           id="notAfter" autocomplete="off">
+                                </div>
 
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                </div>
-                <div class="cell small-12">
-                    <div class="grid-x grid-margin-x">
-                        <div class=" cell small-1">
-                            <h3>JSON</h3>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
                         </div>
-                        <div class="cell small-11">
-                            <jsp:include page="design-components/molecules/float-label-input/index.jsp">
-                                <jsp:param name="id" value="json"/>
-                                <jsp:param name="placeholder" value="Use the search bar to get URL"/>
-                            </jsp:include>
+                        <div id="url">
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-text">JSON</span>
+                                <input id="json" class="form-control url" placeholder="Use the search bar to get URL">
+                                <span class="btn input-group-addon" data-clipboard-target="#json">
+                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                        </span>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-text">RSS</span>
+                                <input id="rss" class="form-control url" placeholder="Use the search bar to get URL">
+                                <span class="btn input-group-addon" data-clipboard-target="#rss">
+                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                        </span>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-text">KML</span>
+                                <input id="kml" class="form-control url" placeholder="Use the search bar to get URL">
+                                <span class="btn input-group-addon" data-clipboard-target="#kml">
+                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                        </span>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-text">MODS</span>
+                                <input id="mods" class="form-control url" placeholder="Use the search bar to get URL">
+                                <span class="btn input-group-addon" data-clipboard-target="#mods">
+                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                        </span>
+                            </div>
+
                         </div>
+                        <br>
+                        <div id="total" class="total"></div>
+                        <div class="pagination"></div>
+                        <div id="content"></div>
                     </div>
-                    <div class="grid-x grid-margin-x">
-                        <div class=" cell small-1">
-                            <h3>RSS</h3>
-                        </div>
-                        <div class="cell small-11">
-                            <jsp:include page="design-components/molecules/float-label-input/index.jsp">
-                                <jsp:param name="id" value="rss"/>
-                                <jsp:param name="placeholder" value="Use the search bar to get URL"/>
-                            </jsp:include>
-                        </div>
-                    </div>
-                    <div class="grid-x grid-margin-x">
-                        <div class=" cell small-1">
-                            <h3>KML</h3>
-                        </div>
-                        <div class="cell small-11">
-                            <jsp:include page="design-components/molecules/float-label-input/index.jsp">
-                                <jsp:param name="id" value="kml"/>
-                                <jsp:param name="placeholder" value="Use the search bar to get URL"/>
-                            </jsp:include>
-                        </div>
-                    </div>
-                    <div class="grid-x grid-margin-x">
-                        <div class=" cell small-1">
-                            <h3>MODS</h3>
-                        </div>
-                        <div class="cell small-11">
-                            <jsp:include page="design-components/molecules/float-label-input/index.jsp">
-                                <jsp:param name="id" value="mods"/>
-                                <jsp:param name="placeholder" value="Use the search bar to get URL"/>
-                            </jsp:include>
-                        </div>
-                    </div>
-                </div>
-                <div class="cell small-12">
-                    <br>
-                    <div id="total" class="total"></div>
-                    <div class="pagination"></div>
-                    <div id="content"><jsp:include page="design-components/organisms/content-spot-banner/index.jsp">
-                        <jsp:param name="id" value="cop-gallerie"/> </jsp:include></div>
                 </div>
             </div>
         </div>
-        </div>
     </body>
+    <script src="js/scripts.js"></script>
+    <!-- PAGINATION -->
+    <script type="text/javascript" src="js/jquery.simplePagination.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/simplePagination.css"/>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.min.css"/>
 
     <script>
         var pagination;
@@ -138,27 +147,7 @@
                 success: function (data, textStatus, response) {
                     $('#total').html('Total number of items: ' + response.getResponseHeader('total'));
                     var html = '';
-
                     $.each(data, function (i, row) {
-
-                        html += '<div class="small-12 medium-4 cell">' +
-                            '<jsp:include page="design-components/organisms/content-spot/index.jsp">' +
-                                <jsp:param name="url" value="' + row['imageURI'] + ' + "/>
-                            </jsp:include>
-                            </div>
-                            <div class="small-12 medium-4 cell">
-                            <jsp:include page="../content-spot/index.jsp">
-                            <jsp:param name="type" value="podcast"/>
-                            </jsp:include>
-                            </div>
-                            <div class="small-12 medium-4 cell">
-                            <jsp:include page="../content-spot/index.jsp">
-                            <jsp:param name="type" value="podcast"/>
-                            </jsp:include>
-                            </div>
-
-
-
                         html += ' <div class="responsive"><div class="gallery">' +
                             '<a target="_blank" href="' + row['link'] + '/da">' +
                             '<img src="' + row['imageURI'] + '"></a> ' +
@@ -166,10 +155,7 @@
                             '</div>' +
                             '</div>';
                     });
-
-
-                    $('#content').html();
-                    $('#test').html();
+                    $('#content').html(html);
                     //initialise the pagination
                     if (pagination == null) {
                         initializePagination(response.getResponseHeader('Pagination-Count'));
@@ -265,5 +251,6 @@
             });
         });
     </script>
+    <%-- KB.DK Design javascripts--%>
 
 </html>

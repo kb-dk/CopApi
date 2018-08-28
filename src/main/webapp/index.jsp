@@ -8,6 +8,18 @@
         <!-- JQUERY -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+        <!-- BOOTSTRAP -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+
+
         <!-- LEAFLET -->
         <link rel="stylesheet" href="css/leaflet.css"/>
         <link rel="stylesheet" href="css/MarkerCluster.css"/>
@@ -23,6 +35,7 @@
         <%--<link type="text/css" rel="stylesheet" href="css/style.css"/>--%>
         <link type="text/css" rel="stylesheet" href="css/kbdk-styles.css"/>
         <link type="text/css" rel="stylesheet" href="css/custom.css"/>
+
 
     </head>
 
@@ -41,59 +54,55 @@
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
                     <h1>Luftfotosamlingen</h1>
-
-                        <div class="grid-x grid-margin-x">
-                            <div class=" cell small-1">
-                                <h3>JSON</h3>
-                            </div>
-                            <div class="cell small-11">
-                                <jsp:include page="design-components/molecules/float-label-input/index.jsp">
-                                    <jsp:param name="id" value="json"/>
-                                </jsp:include>
-                            </div>
-                        </div>
-                        <div class="grid-x grid-margin-x">
-                            <div class=" cell small-1">
-                                <h3>RSS</h3>
-                            </div>
-                            <div class="cell small-11">
-                                <jsp:include page="design-components/molecules/float-label-input/index.jsp">
-                                    <jsp:param name="id" value="rss"/>
-                                </jsp:include>
-                            </div>
-                        </div>
-                        <div class="grid-x grid-margin-x">
-                            <div class=" cell small-1">
-                                <h3>KML</h3>
-                            </div>
-                            <div class="cell small-11">
-                                <jsp:include page="design-components/molecules/float-label-input/index.jsp">
-                                    <jsp:param name="id" value="kml"/>
-                                </jsp:include>
-                            </div>
-                        </div>
-                        <div class="grid-x grid-margin-x">
-                            <div class=" cell small-1">
-                                <h3>MODS</h3>
-                            </div>
-                            <div class="cell small-11">
-                                <jsp:include page="design-components/molecules/float-label-input/index.jsp">
-                                    <jsp:param name="id" value="mods"/>
-                                </jsp:include>
+                    <div class="starter-template">
+                        <div class="row">
+                            <div id="url">
+                                <div class="input-group">
+                                    <span class="input-group-addon input-group-addon-text">JSON</span>
+                                    <input id="json" class="form-control url"
+                                           placeholder="Use the search bar to get URL">
+                                    <span class="btn input-group-addon" data-clipboard-target="#json">
+                                         <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                                    </span>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon input-group-addon-text">RSS</span>
+                                    <input id="rss" class="form-control url"
+                                           placeholder="Use the search bar to get URL">
+                                    <span class="btn input-group-addon" data-clipboard-target="#rss">
+                                        <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                                    </span>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon input-group-addon-text">KML</span>
+                                    <input id="kml" class="form-control url"
+                                           placeholder="Use the search bar to get URL">
+                                    <span class="btn input-group-addon" data-clipboard-target="#kml">
+                                        <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                                    </span>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon input-group-addon-text">MODS</span>
+                                    <input id="mods" class="form-control url"
+                                           placeholder="Use the search bar to get URL">
+                                    <span class="btn input-group-addon" data-clipboard-target="#mods">
+                                         <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                                     </span>
+                                </div>
                             </div>
                         </div>
 
+
+                    <div class="cell small-12">
+                        <br>
+                        <div id="total" class="total"></div>
+                        <br>
+                        <div id="map"></div>
+                    </div>
                 </div>
-                <div class="cell small-12">
-                    <div id="total" class="total"></div>
-
-                    <div id="map"></div>
                 </div>
             </div>
         </div>
-
-        <!--  <jsp:include page="design-components/organisms/footer/index.jsp"/> -->
-
     </body>
 
     <script>
