@@ -108,8 +108,8 @@
     <script>
         var map;
         var geojson;
-        var testserver = "http://distest-03.kb.dk:8080/";
-        var opserver = "http://api.kb.dk/";
+        var testserver = "http://distest-03.kb.dk:8080/data/";
+        var opserver = "http://api.kb.dk/data/";
         var markers;
 
         function getData() {

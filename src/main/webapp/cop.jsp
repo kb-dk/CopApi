@@ -47,7 +47,7 @@
         <div class="inner-content grid-container">
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
-                    <h1>Digital samlingerne</h1>
+                    <h1>Digitale samlinger</h1>
                     <div class="starter-template">
                         <div class="row">
                             <form id="form" class="form-inline">
@@ -121,8 +121,8 @@
 
     <script>
         var pagination;
-        var testserver = "http://distest-03.kb.dk:8080";
-        var opserver = "http://api.kb.dk/";
+        var testserver = "http://distest-03.kb.dk:8080/data/";
+        var opserver = "http://api.kb.dk/data/";
 
         function getData(currentPage) {
             //Display the url

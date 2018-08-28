@@ -132,8 +132,8 @@
 
     <script>
         var xhr;
-        var testserver = "http://distest-03.kb.dk:8080/copapi/";
-        var opserver = "http://api.kb.dk/";
+        var testserver = "http://distest-03.kb.dk:8080/data/";
+        var opserver = "http://api.kb.dk/data/";
 
 
         function getData() {
