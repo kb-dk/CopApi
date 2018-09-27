@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>KB API Demo</title>
+        <title>API Digital collections</title>
         <meta charset="utf-8"/>
 
         <!-- JQUERY -->
@@ -47,7 +47,8 @@
         <div class="inner-content grid-container">
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
-                    <h1>Digitale samlinger</h1>
+                    <h1>Digital collections</h1>
+                    <p>See our collection on this website <a target="blank" href="http://www.kb.dk/editions/any/2009/jul/editions/da/">her</a></p>
                     <div class="starter-template">
                         <div class="row">
                             <form id="form" class="form-inline">

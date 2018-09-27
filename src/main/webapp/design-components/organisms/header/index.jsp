@@ -12,17 +12,15 @@
             <div class="show-for-large medium-9 cell navs">
                 <nav class="top-nav">
                     <ul>
-                        <li><a href="http://www.kb.dk/danmarksetfraluften">Danmark set fra luften</a></li>
-                        <li><a href="http://www.kb.dk/editions/any/2009/jul/editions/da">Digitale samlinger</a></li>
+                        <li><a href="documentation">Documentation</a></li>
                  <!--       <li><a href="http://text-test.kb.dk/">Tekstportal</a></li>-->
                     </ul>
                 </nav>
                 <nav class="main-nav">
                     <ul>
-                        <li><a href="dsfl">DSfL</a></li>
-                        <li><a href="cop">COP</a></li>
-                        <li><a href="text">TEXT</a></li>
-                        <li><a href="documentation">DOCUMENTATION</a></li>
+                        <li><a href="dsfl">Aerial photographs</a></li>
+                        <li><a href="cop">Digital collections</a></li>
+                        <li><a href="text">Text collections</a></li>
                     </ul>
                 </nav>
             </div>

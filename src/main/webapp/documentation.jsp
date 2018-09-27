@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>KB API Demo</title>
+        <title>API Documentation</title>
         <meta charset="utf-8"/>
 
         <!-- JQUERY -->

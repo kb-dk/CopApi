@@ -2,7 +2,7 @@
 
 <html lang="da">
     <head>
-        <title>KB API</title>
+        <title>API Aerial photographs</title>
         <link rel="shortcut icon" href="favicon.ico"/>
 
         <!-- JQUERY -->
@@ -53,7 +53,9 @@
         <div class="inner-content grid-container">
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
-                    <h1>Luftfotosamlingen</h1>
+                    <h1>Aerial photographs</h1>
+                    <p>See our collection on this website <a target="blank" href="http://www.kb.dk/danmarksetfraluften">her</a></p>
+
                     <div class="starter-template">
                         <div class="row">
                             <div id="url">

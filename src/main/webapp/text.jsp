@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>KB API Demo</title>
+    <title>API Text collections</title>
     <meta charset="utf-8"/>
 
 
@@ -37,7 +37,7 @@
     <div class="inner-content grid-container">
         <div class="grid-x grid-margin-x grid-padding-y">
             <div class="cell small-12">
-                <h1>Text</h1>
+                <h1>Text collections</h1>
                 <div class="starter-template">
                     <div class="row">
                 <form id="form" class="form-inline" action="http://index-test.kb.dk/solr/text-retriever-core/select/?q" target="_blank">
@@ -210,7 +210,13 @@
                     var html = ' <option value="">Select a sub collection</option>';
                     $.each(data.facet_counts.facet_fields.subcollection_ssi, function (i, row) {
                         if (i % 2 == 0){
-                            html += ' <option value="' + row + '">' + titleCase(row) + '</option>';
+                            var subcol = titleCase(row);
+                            if (titleCase(row) == "Adl") subcol= "Arkiv for dansk litteratur";
+                            if (titleCase(row) == "Sks") subcol= "Søren Kierkegaard";
+                            if (titleCase(row) == "Holberg") subcol= "Ludvig Holbergs";
+                            if (titleCase(row) == "Pmm") subcol= "Poul Martin Møllers";
+
+                            html += ' <option value="' + row + '">' + subcol + '</option>';
                         }
                     });
                     $('#Sub_collections').html(html);
