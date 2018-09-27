@@ -106,7 +106,7 @@
                            <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                 </div>
-                <div class="input-group">
+               <!-- <div class="input-group">
                     <span class="input-group-addon input-group-addon-text">XML</span>
                     <input id="xml" class="form-control url" placeholder="Use the search bar to get URL">
                     <span class="btn input-group-addon" data-clipboard-target="#xml">
@@ -119,7 +119,7 @@
                     <span class="btn input-group-addon" data-clipboard-target="#csv">
                            <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
                 </span>
-                </div>
+                </div>-->
             </div>
                 </div>
             </div>
@@ -132,8 +132,8 @@
 
     <script>
         var xhr;
-        var testserver = "http://distest-03.kb.dk:8080/data/";
-        var opserver = "http://api.kb.dk/data/";
+        var server = "http://distest-03.kb.dk:8080/data/";
+       // var server = "http://api.kb.dk/data/";
 
 
         function getData() {
@@ -164,9 +164,9 @@
             }
             url = url + queryParameters.join(' AND ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
-            $("#json").val(testserver + url + "&wt=json&indent=on");
-            $("#xml").val(testserver + url + "&wt=xml&indent=on");
-            $("#csv").val(testserver + url + "&wt=csv&indent=on");
+            $("#json").val(server + url + "&wt=json&indent=on");
+            //$("#xml").val(server + url + "&wt=xml&indent=on");
+            //$("#csv").val(server + url + "&wt=csv&indent=on");
 
             //Get data
             xhr = $.ajax({
