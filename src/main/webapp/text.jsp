@@ -132,8 +132,8 @@
 
     <script>
         var xhr;
-        var server = "http://distest-03.kb.dk:8080/data/";
-       // var server = "http://api.kb.dk/data/";
+       // var server = "http://distest-03.kb.dk:8080/data/";
+        var server = "http://api.kb.dk/data/";
 
 
         function getData() {

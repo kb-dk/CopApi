@@ -122,8 +122,8 @@
 
     <script>
         var pagination;
-        var testserver = "http://distest-03.kb.dk:8080/data/";
-        var opserver = "http://api.kb.dk/data/";
+       // var server = "http://distest-03.kb.dk:8080/data/";
+        var server = "http://api.kb.dk/data/";
 
         function getData(currentPage) {
             //Display the url
@@ -135,7 +135,7 @@
                 + "&page=" + currentPage;
 
             var url2 = "http://www.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
-            $("#json").val(testserver + url);
+            $("#json").val(server + url);
 
             $("#rss").val(url2 + "&format=rss");
             $("#mods").val(url2 + "&format=mods");
