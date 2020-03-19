@@ -32,11 +32,11 @@ import java.util.logging.Logger;
 @Api
 public class API {
 
-
-    private String copURL = "http://www.kb.dk/cop/syndication";
-    private String dsflURL = "http://www.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
-    private String contentURL = "http://www.kb.dk/cop/content";
-    private String navigationURL = "http://www.kb.dk/cop/navigation";
+    private static String BASE_URI = "http://www5.kb.dk/cop/";
+    private String copURL = BASE_URI + "syndication";
+    private String dsflURL =  BASE_URI + "syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
+    private String contentURL =  BASE_URI + "content";
+    private String navigationURL =  BASE_URI + "navigation";
     private String textURL = "http://public-index.kb.dk/solr/text-retriever-core/select";
     private static final Logger LOGGER = Logger.getLogger(API.class.getName());
 
@@ -52,7 +52,7 @@ public class API {
 
         try {
             URLReader reader = new URLReader();
-            Document doc = reader.getDocument("http://www.kb.dk/cop/editions/editions/any/2009/jul/editions/da");
+            Document doc = reader.getDocument(BASE_URI + "editions/editions/any/2009/jul/editions/da");
             doc.getDocumentElement().normalize();
 
             NodeList nodeList = doc.getElementsByTagName("item");
