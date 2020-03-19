@@ -2972,11 +2972,11 @@ var externalSearchComps = document.querySelectorAll('.mol-6b8934d5-2aa8-4616-822
 Array.prototype.slice.call(externalSearchComps).forEach(function (el) {
   el.querySelector('input').onkeyup = function (e) {
     if (e.keyCode === 13) {
-      window.open('http://www.kb.dk/en/soeg/?query=' + el.querySelector('input').value, '_blank');
+      window.open('http://www5.kb.dk/en/soeg/?query=' + el.querySelector('input').value, '_blank');
     }
   };
   el.querySelector('button').onclick = function () {
-    window.open('http://www.kb.dk/en/soeg/?query=' + el.querySelector('input').value, '_blank');
+    window.open('http://www5.kb.dk/en/soeg/?query=' + el.querySelector('input').value, '_blank');
   };
 });
 'use strict';
