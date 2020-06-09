@@ -110,14 +110,13 @@
     <script>
         var map;
         var geojson;
-        //var server = "http://distest-03.kb.dk:8080/data/";
-        var server = "http://api.kb.dk/data/";
+        var server = "<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
         var markers;
 
         function getData() {
             var bounds = map.getBounds()._northEast.lng + "," + map.getBounds()._northEast.lat + "," + map.getBounds()._southWest.lng + "," + map.getBounds()._southWest.lat;
 
-            var url = server + "rest/api/dsfl?bbo=" + bounds + "&itemsPerPage=500";
+            var url = server + "/rest/api/dsfl?bbo=" + bounds + "&itemsPerPage=500";
             var url2 = "http://www5.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?bbo=" + bounds + "&itemsPerPage=500&page=1";
 
             $("#json").val(url);
