@@ -135,7 +135,7 @@
                 + "&page=" + currentPage;
 
             var url2 = "http://www5.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
-            $("#json").val(server + url);
+            $("#json").val(url);
 
             $("#rss").val(url2 + "&format=rss");
             $("#mods").val(url2 + "&format=mods");

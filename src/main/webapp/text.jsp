@@ -163,7 +163,7 @@
             }
             url = url + queryParameters.join(' AND ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
-            $("#json").val(server + url + "&wt=json&indent=on");
+            $("#json").val(url + "&wt=json&indent=on");
             //$("#xml").val(server + url + "&wt=xml&indent=on");
             //$("#csv").val(server + url + "&wt=csv&indent=on");
 
