@@ -39,8 +39,8 @@
             <div class="cell small-12">
                 <h1>Text collections</h1>
                 <div class="starter-template">
-                    <div class="row">
-                <form id="form" class="form-inline" action="http://index-test.kb.dk/solr/text-retriever-core/select/?q" target="_blank">
+                    <div class="row">                       
+                <form id="form" class="form-inline" action="https://public-index.kb.dk/solr/text-retriever-core/select/?q" target="_blank">
 
                     <div class="form-group big_search_box">
                         <input type="text" placeholder="Search" class="form-control" id="query" name="q">
@@ -132,15 +132,14 @@
 
     <script>
         var xhr;
-       // var server = "http://distest-03.kb.dk:8080/data/";
-        var server = "http://api.kb.dk/data/";
+	var server = "<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
 
 
         function getData() {
             //Display the url
             addAnd = false;
             var queryParameters = [];
-            var url = "rest/api/text?q=";
+            var url = server + "/rest/api/text?q=";
             if ($('#query').val() != '') {
                 queryParameters.push($('#query').val());
             }
@@ -164,7 +163,7 @@
             }
             url = url + queryParameters.join(' AND ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
-            $("#json").val(server + url + "&wt=json&indent=on");
+            $("#json").val(url + "&wt=json&indent=on");
             //$("#xml").val(server + url + "&wt=xml&indent=on");
             //$("#csv").val(server + url + "&wt=csv&indent=on");
 

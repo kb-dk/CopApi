@@ -123,11 +123,11 @@
     <script>
         var pagination;
        // var server = "http://distest-03.kb.dk:8080/data/";
-        var server = "http://api.kb.dk/data/";
+        var server =  "<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
 
         function getData(currentPage) {
             //Display the url
-            var url = "rest/api/cop?itemsPerPage=30"
+            var url = server + "/rest/api/cop?itemsPerPage=30"
                 + "&id=" + $('#editions').val()
                 + "&query=" + $('#query').val()
                 + "&after=" + $('#notAfter').val()
@@ -135,7 +135,7 @@
                 + "&page=" + currentPage;
 
             var url2 = "http://www5.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
-            $("#json").val(server + url);
+            $("#json").val(url);
 
             $("#rss").val(url2 + "&format=rss");
             $("#mods").val(url2 + "&format=mods");
@@ -172,7 +172,7 @@
         function getEditions() {
             $.ajax({
                 dataType: "json",
-                url: "rest/api/editions",
+                url:  server + "/rest/api/editions",
                 success: function (data) {
                     var html = ' <option value="">Select an edition</option>';
                     $.each(data, function (i, row) {

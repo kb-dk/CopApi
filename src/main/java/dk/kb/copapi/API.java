@@ -37,7 +37,7 @@ public class API {
     private String dsflURL =  BASE_URI + "syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
     private String contentURL =  BASE_URI + "content";
     private String navigationURL =  BASE_URI + "navigation";
-    private String textURL = "http://public-index.kb.dk/solr/text-retriever-core/select";
+    private String textURL = "https://public-index.kb.dk/solr/text-retriever-core/select";
     private static final Logger LOGGER = Logger.getLogger(API.class.getName());
 
     @GET
