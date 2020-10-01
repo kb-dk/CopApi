@@ -139,7 +139,7 @@
             //Display the url
             addAnd = false;
             var queryParameters = [];
-            var url = server + "/rest/api/text?q=";
+            var url = "/data/rest/api/text?q=";
             if ($('#query').val() != '') {
                 queryParameters.push($('#query').val());
             }
@@ -204,7 +204,7 @@
         function getSubcollections() {
             $.ajax({
                 dataType: "json",
-                url: "rest/api/text?q=&rows=0&facet=on&facetfield=subcollection_ssi",
+                url: "/data/rest/api/text?q=&rows=0&facet=on&facetfield=subcollection_ssi",
                 success: function (data) {
                     var html = ' <option value="">Select a sub collection</option>';
                     $.each(data.facet_counts.facet_fields.subcollection_ssi, function (i, row) {
@@ -225,7 +225,7 @@
         function getAuthors() {
             $.ajax({
                 dataType: "json",
-                url: "rest/api/text?q=cat_ssi%3Aauthor+AND+type_ssi%3Awork&wt=json&start=0&rows=75&defType=edismax",
+                url: "/data/rest/api/text?q=cat_ssi%3Aauthor+AND+type_ssi%3Awork&wt=json&start=0&rows=75&defType=edismax",
                 success: function (data) {
                     var html = ' <option value="">Select an author</option>';
                     $.each(data.response.docs, function (i, row) {
