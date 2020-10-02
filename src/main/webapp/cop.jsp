@@ -78,28 +78,28 @@
                                 <span class="input-group-addon input-group-addon-text">JSON</span>
                                 <input id="json" class="form-control url" placeholder="Use the search bar to get URL">
                                 <span class="btn input-group-addon" data-clipboard-target="#json">
-                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                           <img class="clippy" src="/data/css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-text">RSS</span>
                                 <input id="rss" class="form-control url" placeholder="Use the search bar to get URL">
                                 <span class="btn input-group-addon" data-clipboard-target="#rss">
-                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                           <img class="clippy" src="/data/css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-text">KML</span>
                                 <input id="kml" class="form-control url" placeholder="Use the search bar to get URL">
                                 <span class="btn input-group-addon" data-clipboard-target="#kml">
-                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                           <img class="clippy" src="/data/css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-text">MODS</span>
                                 <input id="mods" class="form-control url" placeholder="Use the search bar to get URL">
                                 <span class="btn input-group-addon" data-clipboard-target="#mods">
-                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                           <img class="clippy" src="/data/css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                             </div>
 
@@ -124,7 +124,10 @@
         var pagination;
        // var server = "http://distest-03.kb.dk:8080/data/";
 
-	var server =  "<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
+	var server = "https://api.kb.dk";
+	/*
+	"<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
+	*/
 
 
         function getData(currentPage) {
