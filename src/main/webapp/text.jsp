@@ -132,7 +132,12 @@
 
     <script>
         var xhr;
-	var server = "<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
+	var server = "https://api.kb.dk";
+
+
+	/*
+	"<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
+	*/
 
 
         function getData() {
@@ -163,7 +168,7 @@
             }
             url = url + queryParameters.join(' AND ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
-            $("#json").val(url + "&wt=json&indent=on");
+            $("#json").val(server + url + "&wt=json&indent=on");
             //$("#xml").val(server + url + "&wt=xml&indent=on");
             //$("#csv").val(server + url + "&wt=csv&indent=on");
 
@@ -213,7 +218,8 @@
                             if (titleCase(row) == "Adl") subcol= "Arkiv for dansk litteratur";
                             if (titleCase(row) == "Sks") subcol= "Søren Kierkegaard";
                             if (titleCase(row) == "Holberg") subcol= "Ludvig Holbergs";
-                            if (titleCase(row) == "Pmm") subcol= "Poul Martin Møllers";
+                            if (titleCase(row) == "Pmm") subcol= "Poul Martin Møllers";	
+                            if (titleCase(row) == "Tfs") subcol= "Trykkefrihedens skrifter";
 
                             html += ' <option value="' + row + '">' + subcol + '</option>';
                         }
@@ -225,7 +231,7 @@
         function getAuthors() {
             $.ajax({
                 dataType: "json",
-                url: "/data/rest/api/text?q=cat_ssi%3Aauthor+AND+type_ssi%3Awork&wt=json&start=0&rows=75&defType=edismax",
+                url: "/data/rest/api/text?q=cat_ssi:author+AND+type_ssi:work&wt=json&start=0&rows=75&defType=edismax",
                 success: function (data) {
                     var html = ' <option value="">Select an author</option>';
                     $.each(data.response.docs, function (i, row) {
