@@ -8,6 +8,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -22,9 +25,14 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
+// import java.util.logging.Level;
+// import java.util.logging.Logger;
+
+
 
 //http://localhost:8080/swagger/
 
@@ -38,7 +46,7 @@ public class API {
     private String contentURL =  BASE_URI + "content";
     private String navigationURL =  BASE_URI + "navigation";
     private String textURL = "https://public-index.kb.dk/solr/text-retriever-core/select";
-    private static final Logger LOGGER = Logger.getLogger(API.class.getName());
+    private static Logger logger = LogManager.getLogger(API.class);
 
     @GET
     @ApiOperation(value = "Get the list of editions and retrieve the identifier of the edition, it is needed for any other call ",
@@ -78,7 +86,8 @@ public class API {
                 }
             }
         } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, ex.toString(), ex);
+	    //            logger.log(Level.SEVERE, ex.toString(), ex);
+	    logger.error(ex.toString(), ex);
         }
 
         return editions;
@@ -253,7 +262,7 @@ public class API {
 
             return Response.status(200).entity(jsonText).build();
         } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, ex.toString(), ex);
+             logger.error(ex.toString());
 
         } finally {
             is.close();
