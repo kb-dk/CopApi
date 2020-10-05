@@ -223,6 +223,8 @@ public class API {
 
         URLReader reader = new URLReader();
 
+	logger.debug("Preparing text query for q = {}", q);
+	
         String url = textURL + "?q=" + URLEncoder.encode(q, "UTF-8") + "&wt=json";
 
 
@@ -254,6 +256,8 @@ public class API {
             url += "&facet.field=" + facetfield;
         }
 
+	logger.debug("text URI is {}", url);	
+	
         InputStream is = new URL(url).openStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
