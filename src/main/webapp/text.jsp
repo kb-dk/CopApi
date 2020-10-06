@@ -1,8 +1,16 @@
+<%@ page import="org.apache.logging.log4j.LogManager" %>
+<%@ page import="org.apache.logging.log4j.Logger" %>
+    
 <html>
-<head>
+  <head>
+
+    <% String requestURI = request.getRequestURI() + ""; 
+       Logger logger = LogManager.getLogger(requestURI);
+       logger.debug("initializing");
+       %>
+    
     <title>API Text collections</title>
     <meta charset="utf-8"/>
-
 
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -133,11 +141,6 @@
     <script>
         var xhr;
 	var server = "https://api.kb.dk";
-
-
-	/*
-	"<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
-	*/
 
 
         function getData() {
