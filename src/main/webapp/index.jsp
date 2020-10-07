@@ -2,7 +2,7 @@
 
 <html lang="da">
     <head>
-        <title>KB API</title>
+        <title>API Aerial photographs</title>
         <link rel="shortcut icon" href="favicon.ico"/>
 
         <!-- JQUERY -->
@@ -53,7 +53,9 @@
         <div class="inner-content grid-container">
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
-                    <h1>Luftfotosamlingen</h1>
+                    <h1>Aerial photographs</h1>
+                    <p>See our collection on this website <a target="blank" href="http://www5.kb.dk/danmarksetfraluften">her</a></p>
+
                     <div class="starter-template">
                         <div class="row">
                             <div id="url">
@@ -108,15 +110,17 @@
     <script>
         var map;
         var geojson;
-        var testserver = "http://distest-03.kb.dk:8080/";
-        var opserver = "http://api.kb.dk/";
+        var server = "https://api.kb.dk";
+	/*
+	"<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
+	*/
         var markers;
 
         function getData() {
             var bounds = map.getBounds()._northEast.lng + "," + map.getBounds()._northEast.lat + "," + map.getBounds()._southWest.lng + "," + map.getBounds()._southWest.lat;
 
-            var url = testserver + "rest/api/dsfl?bbo=" + bounds + "&itemsPerPage=500";
-            var url2 = "http://www.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?bbo=" + bounds + "&itemsPerPage=500&page=1";
+            var url = server + "/data/rest/api/dsfl?bbo=" + bounds + "&itemsPerPage=500";
+            var url2 = "http://www5.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?bbo=" + bounds + "&itemsPerPage=500&page=1";
 
             $("#json").val(url);
             $("#rss").val(url2 + "&format=rss");

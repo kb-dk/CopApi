@@ -1,8 +1,15 @@
+<%@ page import="dk.kb.copapi.JspLogger" %>
+    
 <html>
-<head>
-    <title>KB API Demo</title>
-    <meta charset="utf-8"/>
+  <head>
 
+    <% String requestURI = request.getRequestURI() + ""; 
+       JspLogger logger = new JspLogger();
+       logger.debug("text.jsp","initializing " + requestURI);
+       %>
+    
+    <title>API Text collections</title>
+    <meta charset="utf-8"/>
 
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -37,10 +44,10 @@
     <div class="inner-content grid-container">
         <div class="grid-x grid-margin-x grid-padding-y">
             <div class="cell small-12">
-                <h1>Text</h1>
+                <h1>Text collections</h1>
                 <div class="starter-template">
-                    <div class="row">
-                <form id="form" class="form-inline" action="http://index-test.kb.dk/solr/text-retriever-core/select/?q" target="_blank">
+                    <div class="row">                       
+                <form id="form" class="form-inline" action="https://public-index.kb.dk/solr/text-retriever-core/select/?q" target="_blank">
 
                     <div class="form-group big_search_box">
                         <input type="text" placeholder="Search" class="form-control" id="query" name="q">
@@ -106,7 +113,7 @@
                            <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                 </div>
-                <div class="input-group">
+               <!-- <div class="input-group">
                     <span class="input-group-addon input-group-addon-text">XML</span>
                     <input id="xml" class="form-control url" placeholder="Use the search bar to get URL">
                     <span class="btn input-group-addon" data-clipboard-target="#xml">
@@ -119,7 +126,7 @@
                     <span class="btn input-group-addon" data-clipboard-target="#csv">
                            <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
                 </span>
-                </div>
+                </div>-->
             </div>
                 </div>
             </div>
@@ -132,15 +139,14 @@
 
     <script>
         var xhr;
-        var testserver = "http://distest-03.kb.dk:8080/copapi/";
-        var opserver = "http://api.kb.dk/";
+	var server = "https://api.kb.dk";
 
 
         function getData() {
             //Display the url
             addAnd = false;
             var queryParameters = [];
-            var url = "rest/api/text?q=";
+            var url = "/data/rest/api/text?q=";
             if ($('#query').val() != '') {
                 queryParameters.push($('#query').val());
             }
@@ -164,9 +170,9 @@
             }
             url = url + queryParameters.join(' AND ') + "&sort=" + $('#sort').val() + "&rows=" + ($('#rows').val()) + "&start=" + ($('#start').val());
 
-            $("#json").val(testserver + url + "&wt=json&indent=on");
-            $("#xml").val(testserver + url + "&wt=xml&indent=on");
-            $("#csv").val(testserver + url + "&wt=csv&indent=on");
+            $("#json").val(server + url + "&wt=json&indent=on");
+            //$("#xml").val(server + url + "&wt=xml&indent=on");
+            //$("#csv").val(server + url + "&wt=csv&indent=on");
 
             //Get data
             xhr = $.ajax({
@@ -205,12 +211,19 @@
         function getSubcollections() {
             $.ajax({
                 dataType: "json",
-                url: "rest/api/text?q=&rows=0&facet=on&facetfield=subcollection_ssi",
+                url: "/data/rest/api/text?q=&rows=0&facet=on&facetfield=subcollection_ssi",
                 success: function (data) {
                     var html = ' <option value="">Select a sub collection</option>';
                     $.each(data.facet_counts.facet_fields.subcollection_ssi, function (i, row) {
                         if (i % 2 == 0){
-                            html += ' <option value="' + row + '">' + titleCase(row) + '</option>';
+                            var subcol = titleCase(row);
+                            if (titleCase(row) == "Adl") subcol= "Arkiv for dansk litteratur";
+                            if (titleCase(row) == "Sks") subcol= "Søren Kierkegaard";
+                            if (titleCase(row) == "Holberg") subcol= "Ludvig Holbergs";
+                            if (titleCase(row) == "Pmm") subcol= "Poul Martin Møllers";	
+                            if (titleCase(row) == "Tfs") subcol= "Trykkefrihedens skrifter";
+
+                            html += ' <option value="' + row + '">' + subcol + '</option>';
                         }
                     });
                     $('#Sub_collections').html(html);
@@ -220,7 +233,7 @@
         function getAuthors() {
             $.ajax({
                 dataType: "json",
-                url: "rest/api/text?q=cat_ssi%3Aauthor+AND+type_ssi%3Awork&wt=json&start=0&rows=75&defType=edismax",
+                url: "/data/rest/api/text?q=cat_ssi:author+AND+type_ssi:work&wt=json&start=0&rows=75&defType=edismax",
                 success: function (data) {
                     var html = ' <option value="">Select an author</option>';
                     $.each(data.response.docs, function (i, row) {

@@ -8,6 +8,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -22,9 +25,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 //http://localhost:8080/swagger/
 
@@ -32,13 +35,13 @@ import java.util.logging.Logger;
 @Api
 public class API {
 
-
-    private String copURL = "http://www.kb.dk/cop/syndication";
-    private String dsflURL = "http://www.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
-    private String contentURL = "http://www.kb.dk/cop/content";
-    private String navigationURL = "http://www.kb.dk/cop/navigation";
-    private String textURL = "http://public-index.kb.dk/solr/text-retriever-core/select";
-    private static final Logger LOGGER = Logger.getLogger(API.class.getName());
+    private static String BASE_URI = "http://www5.kb.dk/cop/";
+    private String copURL = BASE_URI + "syndication";
+    private String dsflURL =  BASE_URI + "syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
+    private String contentURL =  BASE_URI + "content";
+    private String navigationURL =  BASE_URI + "navigation";
+    private String textURL = "https://public-index.kb.dk/solr/text-retriever-core/select";
+    private static Logger logger = LogManager.getLogger(API.class);
 
     @GET
     @ApiOperation(value = "Get the list of editions and retrieve the identifier of the edition, it is needed for any other call ",
@@ -52,7 +55,7 @@ public class API {
 
         try {
             URLReader reader = new URLReader();
-            Document doc = reader.getDocument("http://www.kb.dk/cop/editions/editions/any/2009/jul/editions/da");
+            Document doc = reader.getDocument(BASE_URI + "editions/editions/any/2009/jul/editions/da");
             doc.getDocumentElement().normalize();
 
             NodeList nodeList = doc.getElementsByTagName("item");
@@ -78,7 +81,8 @@ public class API {
                 }
             }
         } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, ex.toString(), ex);
+	    //            logger.log(Level.SEVERE, ex.toString(), ex);
+	    logger.error(ex.toString(), ex);
         }
 
         return editions;
@@ -214,19 +218,24 @@ public class API {
 
         URLReader reader = new URLReader();
 
+	logger.debug("Preparing text query for q = {}", q);
+	
         String url = textURL + "?q=" + URLEncoder.encode(q, "UTF-8") + "&wt=json";
 
 
         if (start != null) {
             url += "&start=" + start;
+	    logger.debug("\tstart = {}", start);
         }
 
         if (rows != null) {
             url += "&rows=" + rows;
+	    logger.debug("\trows = {}", rows);
         }
 
         if (defType != null) {
             url += "&defType=" + defType;
+	    logger.debug("\ttype = {}", defType);
         }
 
         if (indent != null) {
@@ -243,17 +252,22 @@ public class API {
 
         if (facetfield != null) {
             url += "&facet.field=" + facetfield;
+	    logger.debug("\tfacet field = {}", facetfield);
         }
 
+	logger.debug("text URI is {}", url);	
+	
         InputStream is = new URL(url).openStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 
             String jsonText = readAll(rd);
 
+	    logger.debug("successfully retrieved URI {}", url);	
+	    
             return Response.status(200).entity(jsonText).build();
         } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, ex.toString(), ex);
+             logger.error(ex.toString());
 
         } finally {
             is.close();

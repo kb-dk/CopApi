@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>KB API Demo</title>
+        <title>API Digital collections</title>
         <meta charset="utf-8"/>
 
         <!-- JQUERY -->
@@ -36,7 +36,7 @@
     <body class="theme-yellow">
 
         <jsp:include page="design-components/organisms/header/index.jsp">
-            <jsp:param name="active" value="dsfl"/>
+            <jsp:param name="active" value="cop"/>
         </jsp:include>
 
         <jsp:include page="design-components/atoms/divider/index.jsp">
@@ -47,7 +47,8 @@
         <div class="inner-content grid-container">
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
-                    <h1>Digital samlingerne</h1>
+                    <h1>Digital collections</h1>
+                    <p>See our collection on this website <a target="blank" href="http://www5.kb.dk/editions/any/2009/jul/editions/da/">her</a></p>
                     <div class="starter-template">
                         <div class="row">
                             <form id="form" class="form-inline">
@@ -77,28 +78,28 @@
                                 <span class="input-group-addon input-group-addon-text">JSON</span>
                                 <input id="json" class="form-control url" placeholder="Use the search bar to get URL">
                                 <span class="btn input-group-addon" data-clipboard-target="#json">
-                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                           <img class="clippy" src="/data/css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-text">RSS</span>
                                 <input id="rss" class="form-control url" placeholder="Use the search bar to get URL">
                                 <span class="btn input-group-addon" data-clipboard-target="#rss">
-                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                           <img class="clippy" src="/data/css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-text">KML</span>
                                 <input id="kml" class="form-control url" placeholder="Use the search bar to get URL">
                                 <span class="btn input-group-addon" data-clipboard-target="#kml">
-                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                           <img class="clippy" src="/data/css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-text">MODS</span>
                                 <input id="mods" class="form-control url" placeholder="Use the search bar to get URL">
                                 <span class="btn input-group-addon" data-clipboard-target="#mods">
-                           <img class="clippy" src="css/images/clippy.svg" alt="Copy to clipboard">
+                           <img class="clippy" src="/data/css/images/clippy.svg" alt="Copy to clipboard">
                         </span>
                             </div>
 
@@ -121,20 +122,25 @@
 
     <script>
         var pagination;
-        var testserver = "http://distest-03.kb.dk:8080";
-        var opserver = "http://api.kb.dk/";
+       // var server = "http://distest-03.kb.dk:8080/data/";
+
+	var server = "https://api.kb.dk";
+	/*
+	"<%=new java.net.URL(request.getScheme(),request.getServerName(),request.getServerPort(),request.getContextPath()) %>";
+	*/
+
 
         function getData(currentPage) {
             //Display the url
-            var url = "rest/api/cop?itemsPerPage=30"
+            var url = "/data/rest/api/cop?itemsPerPage=30"
                 + "&id=" + $('#editions').val()
                 + "&query=" + $('#query').val()
                 + "&after=" + $('#notAfter').val()
                 + "&before=" + $('#notBefore').val()
                 + "&page=" + currentPage;
 
-            var url2 = "http://www.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
-            $("#json").val(testserver + url);
+            var url2 = "http://www5.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
+            $("#json").val(url);
 
             $("#rss").val(url2 + "&format=rss");
             $("#mods").val(url2 + "&format=mods");
@@ -171,7 +177,7 @@
         function getEditions() {
             $.ajax({
                 dataType: "json",
-                url: "rest/api/editions",
+                url:  "/data/rest/api/editions",
                 success: function (data) {
                     var html = ' <option value="">Select an edition</option>';
                     $.each(data, function (i, row) {

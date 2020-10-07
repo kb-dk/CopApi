@@ -64,6 +64,15 @@
         <url-pattern>/dsfl</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>documentation</servlet-name>
+        <jsp-file>/documentation.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>documentation</servlet-name>
+        <url-pattern>/documentation</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
