@@ -225,14 +225,17 @@ public class API {
 
         if (start != null) {
             url += "&start=" + start;
+	    logger.debug("\tstart = {}", start);
         }
 
         if (rows != null) {
             url += "&rows=" + rows;
+	    logger.debug("\trows = {}", rows);
         }
 
         if (defType != null) {
             url += "&defType=" + defType;
+	    logger.debug("\ttype = {}", defType);
         }
 
         if (indent != null) {
@@ -249,6 +252,7 @@ public class API {
 
         if (facetfield != null) {
             url += "&facet.field=" + facetfield;
+	    logger.debug("\tfacet field = {}", facetfield);
         }
 
 	logger.debug("text URI is {}", url);	
@@ -259,6 +263,8 @@ public class API {
 
             String jsonText = readAll(rd);
 
+	    logger.debug("successfully retrieved URI {}", url);	
+	    
             return Response.status(200).entity(jsonText).build();
         } catch (Exception ex) {
              logger.error(ex.toString());

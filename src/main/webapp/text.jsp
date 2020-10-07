@@ -1,12 +1,11 @@
-<%@ page import="org.apache.logging.log4j.LogManager" %>
-<%@ page import="org.apache.logging.log4j.Logger" %>
+<%@ page import="dk.kb.copapi.JspLogger" %>
     
 <html>
   <head>
 
     <% String requestURI = request.getRequestURI() + ""; 
-       Logger logger = LogManager.getLogger(requestURI);
-       logger.debug("initializing");
+       JspLogger logger = new JspLogger();
+       logger.debug("text.jsp","initializing " + requestURI);
        %>
     
     <title>API Text collections</title>
