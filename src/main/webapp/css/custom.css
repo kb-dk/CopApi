@@ -104,3 +104,65 @@ footer {
 .inner-content {
     height:auto;
 }
+
+.global-footer .logo {
+    height: 48px !important;
+    width: 7rem;
+}
+
+@media print, screen and (min-width: 64em) {
+    .logo {
+        width: 7rem !important;
+    }
+}
+
+/* icons from rdl */
+
+@font-face {
+    font-family: 'rdl-icons';
+    src: url("../assets/fonts/rdl-icons.ttf");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block; 
+}
+
+.rdl-icons {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'rdl-icons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size: 20px;
+    /* Preferred icon size */
+    /* Enable Ligatures ================ */
+    letter-spacing: 0;
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    font-variant-ligatures: discretionary-ligatures;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.global-footer .some-icons a {
+    background-color: white;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 12px; 
+}
+
+.global-footer .some-icons a i {
+	font-size: 0.875rem;
+	color: #002E70;
+}
+
+.global-footer .some-icons a:hover, .global-footer .some-icons a:focus {
+	text-decoration: none;
+}
