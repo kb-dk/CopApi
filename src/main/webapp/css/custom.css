@@ -94,3 +94,13 @@ div.desc {
     height: 680px;
 }
 
+footer {
+    background-color:#FFF6C4;
+    color:#002E70;
+}
+
+/* Minor fix to make sure the content is in the container */
+
+.inner-content {
+    height:auto;
+}

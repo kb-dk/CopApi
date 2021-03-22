@@ -29,6 +29,9 @@
         <script src="js/leaflet.spin.min.js"></script>
 
 
+        <!-- Cookie script -->
+        <script src="http://cookie-script.com/s/903181bb69e77c4a5adfc4ea71d034aa.js"></script>
+
         <!-- CLIPBOARD -->
         <script src="js/clipboard.min.js"></script>
 
@@ -106,7 +109,13 @@
             </div>
         </div>
     </body>
-
+    <footer>
+        <div class="footerSection inner-content">
+            <a href="javascript:void(0)" id="csconsentlink">Cookie Settings</a>
+            <br> 
+            <a href="https://www.kb.dk/en/privacy-and-personal-data-protection-policy">Privacy and Personal Data Protection Policy</a>
+          </div>
+    </footer>
     <script>
         var map;
         var geojson;
