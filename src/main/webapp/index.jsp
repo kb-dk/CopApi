@@ -123,7 +123,7 @@
                 <p>Hosted by Det Kgl. Bibliotek</p>
               </div>
               <div aria-label="e-mail">
-                <p><a href="mailto:servicedesk@kb.dk">servicedesk@kb.dk</a></p>
+                <p><a href="mailto:kb@kb.dk">kb@kb.dk</a></p>
               </div>
               <div class="some-icons">
                 <a href="https://www.kb.dk/om-os/foelg-os"><i class="rdl-icons">rdl-facebook</i><span class="sr-only">Følg os på facebook</span></a>
