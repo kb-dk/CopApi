@@ -108,6 +108,11 @@ footer {
 .global-footer .logo {
     height: 48px !important;
     width: 7rem;
+    margin-bottom: 20px;
+}
+
+.global-footer p {
+    margin: 0 auto 0.7rem !important;
 }
 
 @media print, screen and (min-width: 64em) {
