@@ -29,6 +29,9 @@
         <script src="js/leaflet.spin.min.js"></script>
 
 
+        <!-- Cookie script -->
+        <script src="http://cookie-script.com/s/903181bb69e77c4a5adfc4ea71d034aa.js"></script>
+
         <!-- CLIPBOARD -->
         <script src="js/clipboard.min.js"></script>
 
@@ -106,7 +109,31 @@
             </div>
         </div>
     </body>
-
+    <footer class="global-footer">
+        <nav class="container">
+          <div class="row">
+            <div class="col-sm-6 col-lg-9">
+              <p><a href="javascript:void(0)" id="csconsentlink">Cookie Settings</a>
+                <br> 
+                <a href="https://www.kb.dk/en/privacy-and-personal-data-protection-policy">Privacy and Personal Data Protection Policy</a></p>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="logo logo-inverted"></div>
+              <div aria-label="hostedby">
+                <p>Hosted by Det Kgl. Bibliotek</p>
+              </div>
+              <div aria-label="e-mail">
+                <p><a href="mailto:kb@kb.dk">kb@kb.dk</a></p>
+              </div>
+              <div class="some-icons">
+                <a href="https://www.kb.dk/om-os/foelg-os"><i class="rdl-icons">rdl-facebook</i><span class="sr-only">Følg os på facebook</span></a>
+                <a href="https://www.linkedin.com/company/det-kgl-bibliotek/"><i class="rdl-icons">rdl-linkedin</i><span class="sr-only">Følg os på linkedin</span></a>
+                <a href="https://www.kb.dk/om-os/foelg-os"><i class="rdl-icons">rdl-twitter</i><span class="sr-only">Følg os på twitter</span></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </footer>
     <script>
         var map;
         var geojson;
