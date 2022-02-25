@@ -190,7 +190,10 @@
 
             map = L.map('map').setView([55.48, 10.4], 10);
 
-            var OpenStreetMap_BlackAndWhite = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+	    // https://tile.openstreetmap.org/${z}/${x}/${y}.png
+	    var BaseURI = 'https://tile.openstreetmap.org/'
+
+            var OpenStreetMap_BlackAndWhite = L.tileLayer( BaseURI + '/bw-mapnik/{z}/{x}/{y}.png', {
                 maxZoom: 18,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
