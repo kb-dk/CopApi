@@ -21,6 +21,7 @@
                         <li><a href="dsfl">Aerial photographs</a></li>
                         <li><a href="cop">Digital collections</a></li>
                         <li><a href="text">Text collections</a></li>
+                        <li><a href="newspaper">Newspapers</a></li>
                     </ul>
                 </nav>
             </div>

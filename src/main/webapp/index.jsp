@@ -57,8 +57,12 @@
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
                     <h1>Aerial photographs</h1>
-                    <p>See our collection on this website <a target="blank" href="http://www5.kb.dk/danmarksetfraluften">her</a></p>
+                    <p>See our collection on this website <a target="blank" href="http://www5.kb.dk/danmarksetfraluften">here</a><br/>
+                       Read more about the collection 'An Aerial View of Denmark' <a href="https://www.kb.dk/en/en/find-material/services/aerial-view-denmark">here</a> </p>
 
+                    <p>Change the values in the fields below by panning the map, to limit data for export by geographical extend.
+                        When the correct part of the map has been chosen, the URLs for the different formats can be used to extract the selected data from the API.</p>
+                    <p></p>
                     <div class="starter-template">
                         <div class="row">
                             <div id="url">

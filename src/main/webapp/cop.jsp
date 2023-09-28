@@ -48,12 +48,33 @@
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
                     <h1>Digital collections</h1>
-                    <p>See our collection on this website <a target="blank" href="http://www5.kb.dk/editions/any/2009/jul/editions/da/">her</a></p>
+                    <p>See our collection on this website <a target="blank" href="http://www5.kb.dk/editions/any/2009/jul/editions/da/">here</a></p>
+
+                    <p>Here it is possible to construct queries, which can be used to programmatically access data from our digital collections.<br/>
+                        Information on these collections can be found <a href="https://www.kb.dk/en/find-materials/systems-and-services/digital-collections">here</a>.
                     <div class="starter-template">
                         <div class="row">
                             <form id="form" class="form-inline">
                                 <div class="form-group">
                                     <select class="selectpicker form-control" name="editions" id="editions">
+                                        <!--
+                                        <option value="">Select an edition</option>
+                                        <option value="/letters/judsam/2011/mar/dsa/da/">David Simonsens Arkiv</option>
+                                        <option value="/pamphlets/dasmaa/2012/jul/smaatryk/da/">Småtryk</option>
+                                        <option value="/pamphlets/dasmaa/2008/feb/partiprogrammer/da/">Partiprogrammer</option>
+                                        <option value="/pamphlets/dasmaa/2008/feb/daellsvarehus/da/">Varehuskataloger</option>
+                                        <option value="/books/judsam/2010/maj/jstryk/da/">Judaistisk Samling: Tidlige og sjældne tryk</option>
+                                        <option value="/manus/judsam/2009/sep/dsh/da/">David Simonsens Håndskrifter</option>
+                                        <option value="/books/ortsam/2011/mar/ostryk/da/">Tidlige tryk i orientalsk samling</option>
+                                        <option value="/manus/musman/2010/dec/viser/da/">Dansk Folkemindesamling</option>
+                                        <option value="/maps/kortsa/2012/jul/kortatlas/da/">Kort og Atlas</option>
+                                        <option value="/manus/vmanus/2011/dec/ha/da/">Vesterlandske Håndskrifter</option>
+                                        <option value="/manus/boghis/2021/dec/kbarkiv/da/">Det Kgl. Biblioteks Arkiv</option>
+                                        <option value="/manus/judsam/2010/maj/jsmss/da/">Judaistisk Samling: Håndskrifter</option>
+                                        <option value="/manus/ortsam/2009/okt/orientalia/da/">Orientalsk samling: Håndskrifter</option>
+                                        <option value="/books/boghis/2017/dec/tryk/da/">Trykte bøger</option>
+                                        <option value="/images/billed/2010/okt/billeder/da/">Billeder</option>
+                                        -->
                                     </select>
                                 </div>
                                 <div class="form-group">
