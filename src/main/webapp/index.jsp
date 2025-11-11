@@ -57,7 +57,7 @@
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
                     <h1>Aerial photographs</h1>
-                    <p>See our collection on this website <a target="blank" href="http://www5.kb.dk/danmarksetfraluften">her</a></p>
+                    <p>See our collection on this website <a target="blank" href="https://www.kb.dk/danmarksetfraluften">her</a></p>
 
                     <div class="starter-template">
                         <div class="row">
@@ -147,7 +147,7 @@
             var bounds = map.getBounds()._northEast.lng + "," + map.getBounds()._northEast.lat + "," + map.getBounds()._southWest.lng + "," + map.getBounds()._southWest.lat;
 
             var url = server + "/data/rest/api/dsfl?bbo=" + bounds + "&itemsPerPage=500";
-            var url2 = "http://www5.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?bbo=" + bounds + "&itemsPerPage=500&page=1";
+            var url2 = "http://wwws.kb.dk/cop/syndication/images/luftfo/2011/maj/luftfoto/subject203?bbo=" + bounds + "&itemsPerPage=500&page=1";
 
             $("#json").val(url);
             $("#rss").val(url2 + "&format=rss");

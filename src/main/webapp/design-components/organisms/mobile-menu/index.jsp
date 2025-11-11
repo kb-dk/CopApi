@@ -4,8 +4,8 @@
             <div class="grid-x grid-padding-x">
                 <div class="cell" >
                     <ul>
-                        <li><a href="http://www5.kb.dk/danmarksetfraluften">Danmark set fra luften</a></li>
-                        <li><a href="http://www5.kb.dk/editions/any/2009/jul/editions/da">Digitale samlinger</a></li>
+                        <li><a href="https://www.kb.dk/danmarksetfraluften">Danmark set fra luften</a></li>
+                        <li><a href="https://www.kb.dk/editions/any/2009/jul/editions/da">Digitale samlinger</a></li>
                         <li><a href="http://text-test.kb.dk/">Tekstportal</a></li>
                         <li><a href="https://www.kb.dk/">Om Det Kgl. Bibliotek</a></li>
                     </ul>
