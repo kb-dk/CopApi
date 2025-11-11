@@ -17,6 +17,6 @@
 !/log/.keep
 /tmp
 /jetty
-/.idea
+.idea
 /public/pdfs/*.pdf
 .keep
