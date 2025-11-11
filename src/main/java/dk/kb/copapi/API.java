@@ -37,7 +37,7 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @Api
 public class API {
 
-    private static String BASE_URI = "https://cop.kb.dk/cop/";
+    private static String BASE_URI = "https://www.kb.dk/cop/";
     private String copURL = BASE_URI + "syndication";
     private String dsflURL =  BASE_URI + "syndication/images/luftfo/2011/maj/luftfoto/subject203?format=kml";
     private String contentURL =  BASE_URI + "content";

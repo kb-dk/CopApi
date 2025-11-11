@@ -139,7 +139,7 @@
                 + "&before=" + $('#notBefore').val()
                 + "&page=" + currentPage;
 
-            var url2 = "https://cop.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
+            var url2 = "https://www.kb.dk/cop/syndication" + $('#editions').val() + "?itemsPerPage=30&query=" + $('#query').val() + "&page=" + currentPage + "&notBefore=" + $('#notBefore').val() + "&notAfter=" + $('#notAfter').val();
             $("#json").val(url);
 
             $("#rss").val(url2 + "&format=rss");
