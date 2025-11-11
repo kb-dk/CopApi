@@ -28,6 +28,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 
 //http://localhost:8080/swagger/
 
@@ -329,63 +331,67 @@ public class API {
         if (itemsPerPage != null) {
             url += "&itemsPerPage=" + itemsPerPage;
         }
+        try {
+            Document xmlDocument = reader.getDocument(url);
+            XPathFactory factory = XPathFactory.newInstance();
+            XPath xPath = factory.newXPath();
 
-        Document xmlDocument = reader.getDocument(url);
-        XPathFactory factory = XPathFactory.newInstance();
-        XPath xPath = factory.newXPath();
+            NodeList placemarkList = (NodeList) xPath.compile("//Placemark").evaluate(xmlDocument, XPathConstants.NODESET);
+            NodeList nameList = (NodeList) xPath.compile("//Placemark/name").evaluate(xmlDocument, XPathConstants.NODESET);
+            NodeList coordList = (NodeList) xPath.compile("//Placemark/Point/coordinates").evaluate(xmlDocument, XPathConstants.NODESET);
+            NodeList thumbnailList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectThumbnailSrc']").evaluate(xmlDocument, XPathConstants.NODESET);
+            NodeList srcList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectImageSrc']").evaluate(xmlDocument, XPathConstants.NODESET);
+            NodeList genreList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectGenre']").evaluate(xmlDocument, XPathConstants.NODESET);
+            NodeList subjectCreationDateList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectCreationDate']").evaluate(xmlDocument, XPathConstants.NODESET);
+            NodeList geographicList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectGeographic']").evaluate(xmlDocument, XPathConstants.NODESET);
+            NodeList recordCreationDateList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='recordCreationDate']").evaluate(xmlDocument, XPathConstants.NODESET);
+            NodeList recordChangeDateList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='recordCreationDate']").evaluate(xmlDocument, XPathConstants.NODESET);
 
-        NodeList placemarkList = (NodeList) xPath.compile("//Placemark").evaluate(xmlDocument, XPathConstants.NODESET);
-        NodeList nameList = (NodeList) xPath.compile("//Placemark/name").evaluate(xmlDocument, XPathConstants.NODESET);
-        NodeList coordList = (NodeList) xPath.compile("//Placemark/Point/coordinates").evaluate(xmlDocument, XPathConstants.NODESET);
-        NodeList thumbnailList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectThumbnailSrc']").evaluate(xmlDocument, XPathConstants.NODESET);
-        NodeList srcList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectImageSrc']").evaluate(xmlDocument, XPathConstants.NODESET);
-        NodeList genreList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectGenre']").evaluate(xmlDocument, XPathConstants.NODESET);
-        NodeList subjectCreationDateList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectCreationDate']").evaluate(xmlDocument, XPathConstants.NODESET);
-        NodeList geographicList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='subjectGeographic']").evaluate(xmlDocument, XPathConstants.NODESET);
-        NodeList recordCreationDateList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='recordCreationDate']").evaluate(xmlDocument, XPathConstants.NODESET);
-        NodeList recordChangeDateList = (NodeList) xPath.compile("//Placemark/ExtendedData/Data[@name='recordCreationDate']").evaluate(xmlDocument, XPathConstants.NODESET);
+            totalResults = (String) xPath.evaluate("//totalResults", xmlDocument);
+            itemsPerPage = (String) xPath.evaluate("//itemsPerPage", xmlDocument);
+            startIndex = (String) xPath.evaluate("//startIndex", xmlDocument);
 
-        totalResults = (String) xPath.evaluate("//totalResults", xmlDocument);
-        itemsPerPage = (String) xPath.evaluate("//itemsPerPage", xmlDocument);
-        startIndex = (String) xPath.evaluate("//startIndex", xmlDocument);
+            for (int i = 0; i < placemarkList.getLength(); i++) {
 
-        for (int i = 0; i < placemarkList.getLength(); i++) {
+                Picture picture = new Picture();
 
-            Picture picture = new Picture();
+                Geometry geometry = new Geometry();
+                geometry.setType("Point");
+                List<Float> list = new ArrayList<Float>();
+                String[] s = coordList.item(i).getTextContent().split(",");
+                list.add(Float.parseFloat(s[0]));
+                list.add(Float.parseFloat(s[1]));
+                geometry.setCoordinates(list);
 
-            Geometry geometry = new Geometry();
-            geometry.setType("Point");
-            List<Float> list = new ArrayList<Float>();
-            String[] s = coordList.item(i).getTextContent().split(",");
-            list.add(Float.parseFloat(s[0]));
-            list.add(Float.parseFloat(s[1]));
-            geometry.setCoordinates(list);
+                picture.setGeometry(geometry);
 
-            picture.setGeometry(geometry);
+                Properties properties = new Properties();
+                properties.setName(nameList.item(i).getTextContent());
+                properties.setThumbnail(thumbnailList.item(i).getTextContent());
+                properties.setSrc(srcList.item(i).getTextContent());
+                properties.setGenre(genreList.item(i).getTextContent());
+                properties.setGeographic(geographicList.item(i).getTextContent());
+                properties.setSubjectCreationDate(subjectCreationDateList.item(i).getTextContent());
+                properties.setRecordCreationDate(recordCreationDateList.item(i).getTextContent());
+                properties.setRecordChangeDate(recordChangeDateList.item(i).getTextContent());
 
-            Properties properties = new Properties();
-            properties.setName(nameList.item(i).getTextContent());
-            properties.setThumbnail(thumbnailList.item(i).getTextContent());
-            properties.setSrc(srcList.item(i).getTextContent());
-            properties.setGenre(genreList.item(i).getTextContent());
-            properties.setGeographic(geographicList.item(i).getTextContent());
-            properties.setSubjectCreationDate(subjectCreationDateList.item(i).getTextContent());
-            properties.setRecordCreationDate(recordCreationDateList.item(i).getTextContent());
-            properties.setRecordChangeDate(recordChangeDateList.item(i).getTextContent());
+                picture.setProperties(properties);
 
-            picture.setProperties(properties);
+                picture.setType("Feature");
 
-            picture.setType("Feature");
+                pictureList.add(picture);
+            }
 
-            pictureList.add(picture);
+            pictures.setFeatures(pictureList);
+
+            return Response.status(200).
+                    entity(pictureList).
+                    header("Pagination-Count", totalResults).
+                    header("Pagination-Page", startIndex).
+                    header("Pagination-Limit", itemsPerPage).build();
+        } catch (Exception e) {
+            logger.fatal("Error reading URL " + url, e);
+            return Response.status(500).entity(e.getMessage()).build();
         }
-
-        pictures.setFeatures(pictureList);
-
-        return Response.status(200).
-                entity(pictureList).
-                header("Pagination-Count", totalResults).
-                header("Pagination-Page", startIndex).
-                header("Pagination-Limit", itemsPerPage).build();
     }
 }
