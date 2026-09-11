@@ -1,0 +1,14 @@
+services:
+  tomcat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tomcat-app
+    ports:
+      - "9080:8080"
+      - "8000:8000"
+    environment:
+      - JPDA_ADDRESS=0.0.0.0:8000
+      - JPDA_TRANSPORT=dt_socket
+    command: ["catalina.sh", "jpda", "run"]
+    restart: unless-stopped
