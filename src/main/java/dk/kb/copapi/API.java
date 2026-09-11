@@ -367,7 +367,7 @@ public class API {
 
                 Properties properties = new Properties();
                 properties.setName(nameList.item(i).getTextContent());
-                properties.setThumbnail(thumbnailList.item(i).getTextContent());
+                properties.setThumbnail(rewriteThumbnailUrl(thumbnailList.item(i).getTextContent()));
                 properties.setSrc(srcList.item(i).getTextContent());
                 properties.setGenre(genreList.item(i).getTextContent());
                 properties.setGeographic(geographicList.item(i).getTextContent());
@@ -393,5 +393,15 @@ public class API {
             logger.fatal("Error reading URL " + url, e);
             return Response.status(500).entity(e.getMessage()).build();
         }
+    }
+
+    private String rewriteThumbnailUrl(String url) {
+        if (url != null && url.startsWith("http://www.kb.dk/imageService")) {
+            return url
+                    .replace("http://www.kb.dk/imageService/w150/h150","https://kb-images.kb.dk")
+                    .replace(".jpg", "/full/,100/0/native.jpg");
+
+        }
+        return url;
     }
 }

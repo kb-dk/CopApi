@@ -48,7 +48,7 @@
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
                     <h1>Digital collections</h1>
-                    <p>See our collection on this website <a target="blank" href="http://www.kb.dk/editions/any/2009/jul/editions/da/">her</a></p>
+                    <p>See our collection on this website <a target="blank" href="https://www.kb.dk/editions/any/2009/jul/editions/da/">her</a></p>
                     <div class="starter-template">
                         <div class="row">
                             <form id="form" class="form-inline">
@@ -155,7 +155,7 @@
                     var html = '';
                     $.each(data, function (i, row) {
                         html += ' <div class="responsive"><div class="gallery">' +
-                            '<a target="_blank" href="' + row['link'] + '/da">' +
+                            '<a target="_blank" href="' + row['link'].replace('www.kb.dk','digitalesamlinger.kb.dk') + '/da">' +
                             '<img src="' + row['imageURI'] + '"></a> ' +
                             '<div class="desc">' + row['title'] + '</div>' +
                             '</div>' +
