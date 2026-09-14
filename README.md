@@ -22,7 +22,7 @@ java -version
 javac -version
 ```
 
-If Java is not installed, install the appropriate JDK for the project.
+If Java is not installed, install the appropriate JDK for the project. It should be version **openjdk 11.0.32 2026-07-21** - it at least works at the time of writing.
 
 ### 2. Install Maven
 
