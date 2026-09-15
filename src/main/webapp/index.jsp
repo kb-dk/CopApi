@@ -57,7 +57,7 @@
             <div class="grid-x grid-margin-x grid-padding-y">
                 <div class="cell small-12">
                     <h1>Aerial photographs</h1>
-                    <p>See our collection on this website <a target="blank" href="https://www.kb.dk/danmarksetfraluften">her</a></p>
+                    <p>See our collection on this website <a target="blank" href="https://www.kb.dk/danmarksetfraluften">here</a></p>
 
                     <div class="starter-template">
                         <div class="row">
@@ -113,9 +113,13 @@
         <nav class="container">
           <div class="row">
             <div class="col-sm-6 col-lg-9">
-              <p><a href="javascript:void(0)" id="csconsentlink">Cookie Settings</a>
+               <p>
+                <a href="javascript:void(0)" id="csconsentlink">Cookie Settings</a>
                 <br> 
-                <a href="https://www.kb.dk/en/privacy-and-personal-data-protection-policy">Privacy and Personal Data Protection Policy</a></p>
+                <a href="https://www.kb.dk/en/privacy-and-personal-data-protection-policy">Privacy and Personal Data Protection Policy</a>
+                <br>
+                <a href="https://was.digst.dk/api-kb-dk">Accessibility statement</a>
+               </p>
             </div>
             <div class="col-sm-6 col-lg-3">
               <div class="logo logo-inverted"></div>
